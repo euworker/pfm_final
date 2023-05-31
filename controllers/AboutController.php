@@ -3,13 +3,13 @@
 
 //  здесь собраны все страницы не имеющие отдельной логики
 
-class CommonController {
+class AboutController {
 
-    private $commonModel;
+    private $aboutModel;
     public $isAuthorized;
 
     public function __construct() {
-        $this->commonModel = new Common();
+        $this->aboutModel = new About();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
     }
@@ -17,8 +17,13 @@ class CommonController {
     
 
 
+    public function actionIndexAbout() { 
+        $title = 'О нас';
+        require_once("views/about/about_table.html");
 
 
+
+    }
 
 }
 

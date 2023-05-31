@@ -2,7 +2,7 @@
 
 
 //  здесь собраны все страницы не имеющие отдельной логики
-class Common {
+class Contacts {
 
     private $connect;
         
@@ -10,6 +10,10 @@ class Common {
     public function __construct(){
 
         $this->connect = DB::getConnection();
+
+    }
+
+    public function getContacts() {
 
     }
 

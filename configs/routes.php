@@ -58,9 +58,21 @@ $routes = array (
         
     ),
 
-    'CommonController' => array (
-        'how_to_buy' => 'indexhowtobuy',
-        'contacts' => 'indexcontacts',
+    // 'CommonController' => array (
+    //     'how_to_buy' => 'indexhowtobuy',
+    //     'contacts' => 'indexcontacts',
+    //     'about' => 'indexabout'
+    // ),
+
+    'HowToBuyController' => array (
+        'how_to_buy' => 'indexhowtobuy'
+    ),
+
+    'ContactsController' => array (
+        'contacts' => 'indexcontacts'
+    ),
+
+    'AboutController' => array (
         'about' => 'indexabout'
     ),
 

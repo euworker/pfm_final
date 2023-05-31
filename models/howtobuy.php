@@ -2,7 +2,7 @@
 
 
 //  здесь собраны все страницы не имеющие отдельной логики
-class Common {
+class HowToBuy {
 
     private $connect;
         
@@ -13,6 +13,10 @@ class Common {
 
     }
 
+
+    public function getHowToBuy() {
+
+    }
 
 
     

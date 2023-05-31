@@ -2,7 +2,7 @@
 
 
 //  здесь собраны все страницы не имеющие отдельной логики
-class Common {
+class About {
 
     private $connect;
         
@@ -13,6 +13,10 @@ class Common {
 
     }
 
+
+    public function getAbout() {
+        
+    }
 
 
     
