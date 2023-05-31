@@ -1,0 +1,92 @@
+<? include_once("views/common/header.html"); ?> 
+
+
+<!-- карусель -->
+
+<div id="carouselExampleControls" class="carousel slide h-25 container" data-bs-ride="carousel">
+    <div class="carousel-inner  ">
+      <div class="carousel-item active">
+        <img src="..." class="d-block w-100" alt="Первый d-inline-block"> 
+      </div>
+      <div class="carousel-item">
+        <img src="..." class="d-block w-100" alt="Второй">
+      </div>
+      <div class="carousel-item">
+        <img src="..." class="d-block w-100"  alt="Третий">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Предыдущий</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Следующий</span>
+    </button>
+  </div>
+
+</div>  
+<!-- Категории -->
+
+<!-- <? foreach ($mainGroups as $mainGroup): ?>
+<?= $mainGroup['group_name']; ?>
+
+<? endforeach; ?> -->
+
+
+<div class="container">
+
+<div class="middle-description  bg-light">Популярные категории</div>
+    
+<div class="album py-2 py ">
+      
+  <div class="container">
+    
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <? foreach ($mainGroups as $mainGroup): ?>
+      <div class="col">
+        <div class="card shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+          <div class="card-body">
+            <p class="card-text"><?= $mainGroup['group_name']; ?></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $mainGroup['group_translit'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                  </a>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <? endforeach; ?>
+    </div>
+    
+  </div>
+
+</div>
+  
+</div>
+
+<!-- О компании -->
+<div class="container ">
+      <div class="middle-description  bg-light">О компании</div>
+      <div class="row align-items-start">
+  
+        <div class="col col-4">
+          <div class="group__foto"><img src="<?= IMG . 'krakenimages-Y5bvRlcCx8k-unsplash.jpg' ?>" class="d-block w-100"  alt="Платформа ИТ">
+          </div>
+        </div>
+        <div class="col col-8 group__name">
+          <p>Интернет-магазин &laquo;Платформа&nbsp;ИТ&raquo; приветствует Вас!
+          Мы&nbsp;работаем с&nbsp;физическими и&nbsp;юридическими лицами за&nbsp;наличный и&nbsp;безналичный расчет со&nbsp;100%-ной предоплатой, с&nbsp;оформлением всех предусмотренных законодательством документов.
+          Здесь Вы&nbsp;сможете подобрать и&nbsp;купить любое сетевое и&nbsp;телекоммуникационное оборудование, IP-телефонию и&nbsp;аксессуары к&nbsp;ней, IP-АТС и&nbsp;шлюзы, IP-камеры, IP-домофоны, сетевые хранилища, источники бесперебойного питания, стабилизаторы напряжения, шкафы и&nbsp;стойки, шредеры и&nbsp;детекторы банкнот, компьютеры и&nbsp;серверы, ноутбуки, мониторы, принтеры, квадрокоптеры и&nbsp;многую другую электронику в&nbsp;наличии и&nbsp;под заказ.
+          </p> 
+          <p>Все цены на&nbsp;сайте включают НДС!</p>
+        </div>
+      </div>
+</div>
+
+<? include_once("views/common/footer.html"); ?>

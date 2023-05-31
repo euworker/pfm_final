@@ -1,0 +1,53 @@
+<? include_once("views/common/header.html"); ?> 
+    <? if($this->isAuthorized) : ?>
+    <a type="submit" class="btn btn-primary" href="<?= FULL_SITE_ROOT . 'product/add'; ?>">
+    Добавить
+    </a>
+    <? endif; ?>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Артикул</th>
+                <th scope="col">Наименование</th>
+                <th scope="col">Описание </th>
+                <th scope="col">Цена</th>
+                <th scope="col">Кол-во</th>
+                <th scope="col">Фото</th>
+                <th scope="col">Склад</th>
+                <th scope="col">Наименование производителя</th>
+                <th scope="col">id производителя</th>
+                <th scope="col">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <? foreach ($products as $product): ?>
+                <tr>
+                    <td> <?= $product['product_id']; ?> </td>
+                    <td> <?= $product['product_art']; ?> </td>
+                    <td> <?= $product['product_name']; ?> </td>
+                    <td> <?= $product['product_description']; ?> </td>
+                    <td> <?= $product['product_price']; ?> </td>
+                    <td> <?= $product['product_quantity']; ?> </td>
+                    <td> <?= $product['product_img_link']; ?> </td>
+                    <td> <?= $product['warehouse_name']; ?> </td>
+                    <td> <?= $product['manufacturer_name']; ?> </td>
+                    <td> <?= $product['manufacturer_id']; ?> </td>
+                    
+
+                    <td>
+                        <? if($this->isAuthorized) : ?>
+                        <a type="submit" class="btn btn-success" href="<?= FULL_SITE_ROOT . 'product/edit/' . $product['product_id'] ; ?>">
+                            Изменить
+                            </a>
+                        <button type="submit" class="btn btn-danger" onclick="remove('product', <?= $product['product_id']; ?> )">
+                                Удалить
+                        </button>
+                        <? endif; ?>
+                    </td>
+                </tr>
+                <? endforeach; ?>
+        </tbody>
+    </table>
+
+<? include_once("views/common/footer.html"); ?>

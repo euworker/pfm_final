@@ -1,0 +1,70 @@
+<? include_once("views/common/header.html"); ?> 
+
+
+<form method="POST" action="" name="form">
+    <label for="form" class="form-label">Введение данных по товару</label> </br>
+    <div class="mb-3">
+        <label class="form-label" for="product_art">Артикул, до 40 символов</label></br>
+        <input class="form-control" type="text" name="product_art" placeholder="rt670" maxlength="40" 
+        value="<?= isset($product)? $product['product_art'] : '' ?>">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="product_name">Наименование(префикс). Только кириллица, до 100 символов</label></br>
+        <input class="form-control" type="text" name="product_name" placeholder="Холодильник" maxlength="100"
+        value="<?= isset($product)? $product['product_name'] : '' ?>"> <br>
+    </div>
+    <div class="mb-3 form-floating" >
+        <label class="form-label" for="product_description">Описание товара. До 980 символов</label> <br>
+        <textarea class="form-control" name="product_description" id="" cols="40" rows="10"  maxlength="980"
+        ><?= isset($product)? $product['product_description'] : '' ?></textarea><br>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="product_price">Цена. Целые числа до 99999999 </label> </br>
+        <input class="form-control" type="text" name="product_price" placeholder="500" maxlength="8"
+        value="<?= isset($product)? $product['product_price'] : '' ?>"> <br>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="product_quantity">Кол-во. Целые числа до 99999999 </label> </br>
+        <input class="form-control" type="text" name="product_quantity" placeholder="999" maxlength="8"
+        value="<?= isset($product)? $product['product_quantity'] : '' ?>"> <br>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="product_img_link">Фото</label> </br>
+        <input class="form-control" type="text" name="product_img_link" placeholder="ссылка"
+        value="<?= isset($product)? $product['product_img_link'] : '' ?>"> <br> 
+    </div>
+    <!-- <div>
+    <label for="product_group_name">Раздел</label> <br>
+        <select name="product_group_name">
+            <? foreach ($groups as $group): ?>
+            <option value=" <?= $group['group_id']?>"><?= $group['group_name']?></option>
+            <? endforeach; ?>
+        </select>
+    </div>
+    <div>
+        <label for="product_warehouse_name">Склад</label> <br>
+        <select name="product_warehouse_name" >
+            <? foreach ($warehouses as $warehouse): ?>
+            <option value=" <?= $warehouse['warehouse_id']?>"><?= $warehouse['warehouse_name']?></option>
+            <? endforeach; ?>
+        </select>
+    </div> -->
+
+    <div>
+        <label class="form-label" for="product_manufacturer_name">Производитель</label> <br>
+        <select name="product_manufacturer_name">
+            <? foreach ($manufacturers as $manufacturer): ?>
+            <option <?= (isset($product) &&  in_array($manufacturer['manufacturer_id'], $product['manufacturers_getById'] )) ? 'selected': '' ?>
+            value=" <?= $manufacturer['manufacturer_id']?>"><?= $manufacturer['manufacturer_name']?></option>
+            <? endforeach; ?>
+        </select>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary">
+        <?= isset($manufacturer) ? 'Изменить' : 'Добавить'; ?>
+    </button>
+
+</form>
+
+<? include_once("views/common/footer.html"); ?>

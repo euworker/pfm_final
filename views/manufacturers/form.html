@@ -1,0 +1,19 @@
+<? include_once("views/common/header.html"); ?> 
+
+
+
+<form method="POST">
+  <div class="mb-3">
+    <label class="form-label">Наименование вендора</label> <br>
+    <input type="text" class="form-control" name="manufacturerName" value ="<?= isset ($manufacturer) ? $manufacturer['manufacturer_name'] : ''; ?>" >
+  </div>
+  <div class="mb-3 form-floating">
+    <label for="floatingTextarea_add">Описание вендора</label> <br>    
+  <textarea class="form-control" id="floatingTextarea_add" name="manufacturerDesc"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">
+    <?= isset($manufacturer) ? 'Изменить' : 'Добавить'; ?> 
+    </button>
+</form>
+
+<? include_once("views/common/footer.html"); ?>

@@ -1,0 +1,28 @@
+<? include_once("views/common/header.html"); ?> 
+
+
+<div class="container">
+  <form method="POST">
+    <div class="mb-3 ">
+      <label class="form-label"  for="user_email">Адрес почты. Может содержать латиницу, кириллицу, "_", точку, цифры. Всего, не более 100 символов. </label> <br>
+      <input class="form-control" type="email" name="user_email" maxlength="100"> <br>
+    </div>
+
+
+    <div class="mb-3 ">
+      <label class="form-label" for="user_password">Пароль. Обязательно латиница, верхний/нижний регистр, цифры. Всего от 4 до 8 символов</label><br>
+      <input class="form-control" type="password" name="user_password" minlength="4" maxlength="8" id="inputPassword"> <br>
+      
+    </div>
+
+
+    <div class="mb-3 ">
+    <button type="submit" class="btn btn-primary">
+      Авторизироваться
+      </button>
+  </div>
+
+</div>
+
+
+<? include_once("views/common/footer.html"); ?>

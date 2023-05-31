@@ -1,0 +1,39 @@
+
+
+
+<? include_once("views/common/header.html"); ?> 
+    <? if($this->isAuthorized) : ?>
+    <a type="submit" class="btn btn-primary" href="<?= FULL_SITE_ROOT . 'manufacturer/add'; ?>">
+    Добавить
+    </a>
+    <? endif; ?>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <? foreach ($manufacturers as $manufacturer): ?>
+                <tr>
+                    <td> <?= $manufacturer['manufacturer_id']; ?> </td>
+                    <td> <?= $manufacturer['manufacturer_name']; ?> </td>
+                    <td>
+                        <? if($this->isAuthorized) : ?>
+                        <a type="submit" class="btn btn-success" href="<?= FULL_SITE_ROOT . 'manufacturer/edit/' . $manufacturer['manufacturer_id'] ; ?>">
+                            Изменить
+                            </a>
+                        <button type="submit" class="btn btn-danger" onclick="remove('manufacturer', <?= $manufacturer['manufacturer_id']; ?> )">
+                                Удалить
+                        </button>
+                        <? endif; ?>
+                    </td>
+                </tr>
+                <? endforeach; ?>
+        </tbody>
+    </table>
+    <?= $pagination->get(); ?>
+
+<? include_once("views/common/footer.html"); ?>

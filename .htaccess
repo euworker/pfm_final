@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# AddType application/x-httpd-php .html  для отображения вставки php в html
+# AddHandler application/x-httpd-php .php .html .shtml .htm
+# AddType application/x-httpd-php .html
+#  (.*) - регулярка, то откуда мы перенаправляем,  index.php - куда
+RewriteRule (.*) index.php [L]
