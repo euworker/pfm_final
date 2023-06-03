@@ -35,7 +35,8 @@ class Main {
 
     public function getMainGroups() {
         $query = "SELECT * FROM `groups` 
-                    LIMIT 6
+            WHERE group_level = 1 
+            LIMIT 6
                     ";
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -44,7 +45,8 @@ class Main {
 
     public function getMenuGroups() {
         $query = "SELECT * FROM `groups` 
-                    LIMIT 6
+        WHERE group_level = 1 
+        LIMIT 6
                     ";
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);

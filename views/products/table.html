@@ -19,8 +19,15 @@
         <div class="album py-2 py ">
               
           <div class="container">
-            
+            <? if(isset($empty)) : ?>
+            <div class="container">
+              <div><?= $empty ?></div>
+            </div>
+            <? endif; ?>
+
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+              <? if(isset($products)) : ?>
               <? foreach ($products as $product): ?>
               <div class="col">
                 <div class="card shadow-sm">
@@ -30,7 +37,30 @@
                     <p class="card-text"><?= $product['product_name']; ?> <?= $product['product_art']; ?> </p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $product['group_translit'] . '/' . $product['product_id']; ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/'  . $product['group_translit'] . '/' . $product['product_id']; ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                          </a>
+                        <!--  -->
+        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <? endforeach; ?>
+
+              <? else : ?>
+
+              <? foreach ($groups as $group): ?>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                  <div class="card-body">
+                    <p class="card-text"><?= $group['group_name']; ?> </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $group['group_translit']; ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
                           </a>
                         <!--  -->
         
@@ -40,11 +70,30 @@
                 </div>
               </div>
               <? endforeach; ?>
+
+              <? endif; ?>
+
             </div>
             
           </div>
-          <div class="pagination"><?= $pagination->get(); ?> </div>
+
+          <? if(!isset($empty)) : ?>
+          <div class="container">
+            <div class="pagination"><?= $pagination->get(); ?> </div>
+          </div>
+        <? endif; ?>
+          
+ 
+      
+      
 </div>
+
+
+
+
+
+
+
 
 
 

@@ -57,10 +57,20 @@ class Product {
         return mysqli_fetch_assoc($result);
     }
 
-    public function getByNameTranslit($group_name_translit, $limit, $offset) {
+    public function getProductsByNameTranslitGroup($group_name_translit, $limit, $offset) {
+    $query = " SELECT `parent_group_id`
+        FROM `groups`
+        LEFT JOIN `groups_tree` ON `group_id` = `children_group_id`
+        WHERE `group_translit` = '$group_name_translit'
+        ";
+    $result = mysqli_query($this->connect, $query);
+    $parent_group_id = mysqli_fetch_assoc($result)['parent_group_id'];
 
     $query ="SELECT `product_id`, `product_art`, `product_name`, `product_description`, `product_price`, `product_quantity`, 
-        `product_img_link`, `manufacturer_name`, `manufacturer_id`, `group_translit`, `group_name`
+        `product_img_link`, `manufacturer_name`, `manufacturer_id`, `group_translit`, `group_name`, 
+        (SELECT `group_translit`
+                FROM `groups` 
+                WHERE `group_id` = '$parent_group_id') as `parent_group_name`
         -- `warehouse_name`,
         FROM `products`
         -- LEFT JOIN `warehouses` ON `product_warehouse_id` = `warehouse_id`
@@ -76,6 +86,31 @@ class Product {
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
+    public function getGroupByNameTranslitGroup($group_name_translit, $limit, $offset) {
+       
+       $query = " SELECT `group_id`
+            FROM `groups`
+            LEFT JOIN `groups_tree` ON `group_id` = `children_group_id`
+            WHERE `group_translit` = '$group_name_translit'
+            ";
+        $result = mysqli_query($this->connect, $query);
+        $parent_group_id = mysqli_fetch_assoc($result)['group_id'];
+
+        $query ="SELECT `group_id`, `group_name`, `group_translit`, `group_level`, `main_group_id`, `parent_group_id`, `children_group_id`, 
+            (SELECT `group_name`
+                FROM `groups` 
+                WHERE `group_translit` = '$group_name_translit') as `parent_group_name`
+            FROM `groups`
+            LEFT JOIN `groups_tree` ON `group_id` = `children_group_id`
+            WHERE parent_group_id = '$parent_group_id' 
+            LIMIT $offset, $limit";
+            
+    
+        $result = mysqli_query($this->connect, $query);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    
+
     public function getAllPaginated($limit, $offset) {
         $query = "SELECT * FROM `products` 
                     WHERE `product_is_deleted` = 0
@@ -84,6 +119,27 @@ class Product {
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+
+
+    public function getGroupLevel($group_name_translit) {
+        $query = "SELECT group_level 
+                    FROM `groups` 
+                    WHERE `group_translit` = '$group_name_translit';
+        ";
+        $result = mysqli_query($this->connect, $query);
+        return mysqli_fetch_assoc($result)['group_level'];
+    }
+
+    // public function getGroupParent($group_name_translit) {
+    //     $query = "SELECT `group_name`
+    //                 FROM `groups` 
+    //                 WHERE `group_translit` = '$group_name_translit';
+    //     ";
+    //     $result = mysqli_query($this->connect, $query);
+    //     return mysqli_fetch_assoc($result)['group_name'];
+    // }
+
+
 
     public function getTotal() {
         $query = "SELECT count(*) AS `count`
@@ -95,16 +151,36 @@ class Product {
 
     }
 
-    public function getTotalGroup($group_name_translit) {
+    public function getTotalProductsInGroup($group_name_translit) {
         $query = "SELECT count(*) AS `count`
                     FROM `products`
                     LEFT JOIN `groups` ON `group_id` = `product_group_id`
-                    WHERE `product_is_deleted` = 0 AND `group_translit` = '$group_name_translit';
+                    WHERE `product_is_deleted` = 0 AND `group_translit` = '$group_name_translit'
         ";
         $result = mysqli_query($this->connect, $query);
         return mysqli_fetch_assoc($result)['count'];
 
     }
+
+    public function getTotalChildGroupsInParentGroup($group_name_translit) {
+
+     $query = " SELECT `group_id`
+            FROM `groups`
+            LEFT JOIN `groups_tree` ON `group_id` = `children_group_id`
+            WHERE `group_translit` = '$group_name_translit'
+            ";
+        $result = mysqli_query($this->connect, $query);
+        $parent_group_id = mysqli_fetch_assoc($result)['group_id'];
+
+    $query = "SELECT count(*) AS `count`
+                    FROM `groups`
+                    LEFT JOIN `groups_tree` ON `group_id` = `children_group_id`
+                    WHERE `parent_group_id` = '$parent_group_id'
+                    ";
+        $result = mysqli_query($this->connect, $query);
+        return mysqli_fetch_assoc($result)['count'];
+    }
+
     
 
     public function edit($data, $id) {

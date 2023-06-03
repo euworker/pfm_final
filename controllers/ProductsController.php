@@ -34,39 +34,58 @@ class ProductsController {
     }
 
     public function actionGroup($group_name_translit, $page = 1) {
+        
+        $level = $this ->productModel->getGroupLevel($group_name_translit);
 
-        // $products = $this->productModel->getByNameTranslit($group_name_translit);
-        // if (count($products)==0) {
-        //     header('Location: '. FULL_SITE_ROOT . 'products');  // 
-        // }
-        // // print_r($products);
-        // // $title = 'Товары';
-        // $h1 = $products[0]['group_name'];
-        // $title = 'Товары ' . $products[0]['group_name'];
-        // require_once("views/products/table.html");
+        if ($level === '2')  {
+            $total = $this->productModel->getTotalProductsInGroup($group_name_translit);
+            $limit = 6;
+            $currentPage = $page;
+            $index = 'page=';
+            $offset = ($page - 1) * $limit;
+            $pagination = new Pagination($total, $currentPage, $limit, $index);
+            // print('до' . $limit . ' ' . $offset);
+            $products = $this->productModel->getProductsByNameTranslitGroup($group_name_translit, $limit, $offset);
+            // дописать 
 
-        $total = $this->productModel->getTotalGroup($group_name_translit);
-        $limit = 3;
-        $currentPage = $page;
-        $index = 'page=';
-        $offset = ($page - 1) * $limit;
-        $pagination = new Pagination($total, $currentPage, $limit, $index);
-        print('до' . $limit . ' ' . $offset);
-        $products = $this->productModel->getByNameTranslit($group_name_translit, $limit, $offset);
-        // дописать 
-        // if (count($products)==0) {
-        //         header('Location: '. FULL_SITE_ROOT . 'stocks');  // 
-        //     }
-        print('после' . $limit . ' ' . $offset);
-        // print_r($products);
-        $h1 = $products[0]['group_name'];
-        $title = 'Товары ' . $products[0]['group_name'];
+            if (count($products)==0) {
+                $title = 'Товары';
+                $empty = "К сожалению, пусто. Наполняем товарами)";
+                } else {
+                    $h1 = $products[0]['group_name'];
+                    $title = 'Товары ' . $products[0]['group_name'];
+                }
+            // print('после' . $limit . ' ' . $offset);
+            // print_r($products);
 
-        require_once("views/products/table.html");
+    
+            require_once("views/products/table.html");
 
-        // $products = $this->productModel->getAllPaginated($limit, $offset);
-        // $title = 'Товары';
-        // require_once("views/products/table.html");
+        } else {
+            $total = $this->productModel->getTotalChildGroupsInParentGroup($group_name_translit);
+            print($total);
+            $limit = 3;
+            $currentPage = $page;
+            $index = 'page=';
+            $offset = ($page - 1) * $limit;
+            $pagination = new Pagination($total, $currentPage, $limit, $index);
+            // print('до' . $limit . ' ' . $offset);
+            $groups = $this->productModel->getGroupByNameTranslitGroup($group_name_translit, $limit, $offset);
+            // дописать 
+
+            if (count($groups)==0) {
+                $title = 'Группа товаров';
+                $empty = "К сожалению, пусто. Наполняем )";
+            } else {
+                $h1 = $groups[0]['parent_group_name'];
+                $title = 'Товары ' . $groups[0]['parent_group_name'];
+            }
+            // print('после' . $limit . ' ' . $offset);
+            // print_r($products);
+
+    
+            require_once("views/products/table.html");
+        }
     }
 
     
