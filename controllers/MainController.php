@@ -7,10 +7,18 @@ class MainController {
     private $mainModel;
     public $isAuthorized;
 
+
+    private $commonModel;
+    private $groupModel;
+
+    private $menuProducts;
+
+
     public function __construct() {
         $this->mainModel = new Main();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+         
     }
 
     

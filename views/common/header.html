@@ -104,14 +104,18 @@
               <li class="nav-item">
                 
                 <div class="dropdown">
+                  
                   <a class=" nav-link <?= $title === 'Товары' ? 'active' : '' ?>" href="<?= FULL_SITE_ROOT . 'products' ?>" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="nav__bottom__item__icon fas fa-bars"></i> Каталог</a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                    <li><a class="dropdown-item <?= $title === 'Товары' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'products' ?>">Все</a></li>
+                    
+                    <li><a class="dropdown-item <?= $title === 'Каталог' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'groups' ?>">Все</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Другое действие</a></li>
+                    <? foreach ($menuProducts as $menuProduct): ?>
+                    <li><a class="dropdown-item" href="<?= FULL_SITE_ROOT . 'product' . '/' . $menuProduct['group_translit']?>"><?=  $menuProduct['group_name'] ?></a></li>
                     <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                    <? endforeach; ?>
                   </ul>
+                  
                   </div>
               </li>
               <li class="nav-item">

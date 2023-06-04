@@ -3,7 +3,7 @@
 //  require_once("models/manufacturer.php");
 
 class ManufacturerController {
-
+    private $groupModel;
     private $manufacturerModel;
     public $isAuthorized;
 
@@ -11,10 +11,12 @@ class ManufacturerController {
         $this->manufacturerModel = new Manufacturer();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+        $this->groupModel = new Group();
     }
 
  
     public function actionIndex($page = 1) { 
+        $menuProducts = $this-> groupModel->getOneLevelNameGroups(); 
         $total = $this->manufacturerModel->getTotal();
         $limit = 3;
         $currentPage = $page;

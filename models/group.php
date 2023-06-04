@@ -27,6 +27,15 @@ class Group {
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+    public function getOneLevelNameGroups() {
+        $query = "SELECT *
+                    FROM `groups` 
+                    WHERE `group_level` = '1'
+                    ";
+        $result = mysqli_query( $this->connect, $query);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
 
 
     public function getAllGroupsPaginated($limit, $offset) {
@@ -37,9 +46,4 @@ class Group {
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    
-
-
-
-    
 }

@@ -6,6 +6,7 @@ class GroupController {
 
     private $groupModel;
     public $isAuthorized;
+    // public $menuProducts;
 
     public function __construct() {
         $this->groupModel = new Group();
@@ -14,7 +15,8 @@ class GroupController {
     }
 
     public function actionIndex($page = 1) { 
-        // $manufacturers = $this->mainModel->getTotal();
+        $menuProducts = $this-> groupModel->getOneLevelNameGroups();
+        print_r($menuProducts);
         $total = $this->groupModel->getGroupsCount();
         $limit = 6;
         $currentPage = $page;
@@ -26,6 +28,8 @@ class GroupController {
         require_once("views/groups/table.html");
 
     }
+
+
 
 
 

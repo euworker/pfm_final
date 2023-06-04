@@ -3,7 +3,7 @@
 //  require_once("models/manufacturer.php");
 
 class StocksController {
-
+    private $groupModel;
     private $stockModel;
     public $isAuthorized;
 
@@ -11,10 +11,12 @@ class StocksController {
         $this->stockModel = new Stock();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+        $this->groupModel = new Group();
     }
 
     public function actionIndex($page = 1) { 
         // $manufacturers = $this->mainModel->getTotal();
+        $menuProducts = $this-> groupModel->getOneLevelNameGroups(); 
         $total = $this->stockModel->getStocksCount();
         $limit = 6;
         $currentPage = $page;

@@ -4,6 +4,7 @@ require_once("functions.php");
 class ProductsController {
     private $productModel;
     private $manufacturerModel;
+    private $groupModel;
     public $isAuthorized;
 
 
@@ -12,16 +13,11 @@ class ProductsController {
         $this->manufacturerModel = new Manufacturer();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
-        
-        
+        $this->groupModel = new Group();
     }
 
     public function actionIndex($page = 1) { 
-        // $products = $this->productModel->getAll();
-        // $title = 'Товары';
-        // require_once("views/products/table.html");
-
-
+        $menuProducts = $this-> groupModel->getOneLevelNameGroups(); 
         $total = $this->productModel->getTotal();
         $limit = 3;
         $currentPage = $page;

@@ -6,17 +6,23 @@
 class ContactsController {
 
     private $contactsModel;
+    private $groupModel;
     public $isAuthorized;
+    
 
     public function __construct() {
         $this->contactsModel = new Contacts();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+        $this->groupModel = new Group();
+        
     }
 
     
 
     public function actionIndexcontacts() { 
+        
+        $menuProducts = $this-> groupModel->getOneLevelNameGroups(); 
         $title = 'Контакты';
         require_once("views/contacts/contacts_table.html");
 
