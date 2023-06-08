@@ -8,17 +8,16 @@ class MainController {
     public $isAuthorized;
 
 
-    private $commonModel;
-    private $groupModel;
-
-    private $menuProducts;
-
 
     public function __construct() {
         $this->mainModel = new Main();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
-         
+        $menu = new Menu();
+// переменная существет только до хапуска роутера
+        $menuProducts = $menu -> getOneLevelNameGroups();
+       
+
     }
 
     
@@ -27,6 +26,7 @@ class MainController {
 
 
     public function actionIndex($page = 1) { 
+        
         // $manufacturers = $this->mainModel->getTotal();
         $mainGroups = $this->mainModel->getMainGroups();
 

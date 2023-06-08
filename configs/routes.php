@@ -15,7 +15,6 @@ $routes = array (
 
 
     'ManufacturerController' => array (
-        
         'manufacturer/add' => 'add',
         'manufacturer/edit/([0-9+])' => 'edit/$1',
         'manufacturer/delete/([0-9+])' => 'delete/$1',
@@ -27,6 +26,10 @@ $routes = array (
         'user/reg' => 'reg',
         'user/auth' => 'auth',
         'logout' => 'logout'
+    ),
+
+    'SearchController' => array (
+        'search' => 'index'
     ),
 
     // 'ProductsController' => array (
@@ -67,14 +70,12 @@ $routes = array (
 
     'GroupController' => array (
         'groups/page=([0-9+])' => 'index/$1',
-        'groups' => 'index'
-        
+        'groups' => 'index'    
     ),
 
     'StocksController' => array (
         'stocks/page=([0-9+])' => 'index/$1',
         'stocks' => 'index'
-        
     ),
 
     // 'CommonController' => array (
@@ -97,10 +98,7 @@ $routes = array (
 
     
     'MainController' => array (
-
         '' => 'index'
-
-
     )
 
 

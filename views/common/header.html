@@ -82,9 +82,11 @@
         </svg>
       </a>
         <!-- Поиск -->
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-        <input type="search" class="form-control main-search" placeholder="Поиск..." aria-label="Search">
+      <form method="POST"  
+      action="<?= SEARCH ?>" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+        <input type="search" class="form-control main-search" placeholder="Поиск..." aria-label="Search" name="search">
       </form>
+      <!-- корзина -->
       <div class="cart col-12 col-lg-auto mb-3 mb-lg-0"><i class="fa-solid fa-basket-shopping"></i></div>
 
     </div>
@@ -110,9 +112,8 @@
                     
                     <li><a class="dropdown-item <?= $title === 'Каталог' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'groups' ?>">Все</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <? foreach ($menuProducts as $menuProduct): ?>
+                    <? foreach ($menuProducts as $menuProduct) : ?>
                     <li><a class="dropdown-item" href="<?= FULL_SITE_ROOT . 'product' . '/' . $menuProduct['group_translit']?>"><?=  $menuProduct['group_name'] ?></a></li>
-                    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
                     <? endforeach; ?>
                   </ul>
                   

@@ -13,11 +13,9 @@ class ProductsController {
         $this->manufacturerModel = new Manufacturer();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
-        $this->groupModel = new Group();
     }
 
     public function actionIndex($page = 1) { 
-        $menuProducts = $this-> groupModel->getOneLevelNameGroups(); 
         $total = $this->productModel->getTotal();
         $limit = 3;
         $currentPage = $page;
@@ -92,7 +90,7 @@ class ProductsController {
         
         $h1 = $product['product_name'] . ' ' . $product['product_art'];
         $title = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_TITLE;
-        $description = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_DESRIPTION;
+        $description = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_DESCRIPTION;
         $src = IMG_PRODUCT . $product['product_id']. '.jpeg';
         // echo (file_exists(IMG_ROOT. $product['product_id']. '.jpeg'));
         // die;
