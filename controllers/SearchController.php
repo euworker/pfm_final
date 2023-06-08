@@ -20,9 +20,14 @@ class SearchController {
 
     public function actionIndex(){
         $errors = [];
-        $search = [0];
+        $emptySearch = "К сожалению, ничего не найдено";
+        // $search = [0];
         if (isset($_POST["search"])) {
         $search = htmlentities($_POST["search"]);
+        $searchCheck = $this->searchModel->checkSearchResult($_COOKIE['search']);
+        if ($searchCheck == '1') {
+            $errors = [$emptySearch];
+        }
         // запписываем куки
         setcookie("search", $search, time() + 2 * 24 * 3600, path:'/');
         // рефрешим страницу чтобы куки появились 
@@ -31,23 +36,20 @@ class SearchController {
         die; 
     }
 
-
-
         if (empty($errors)) {
 
-            $search = $this->searchModel->checkSearchResult($_COOKIE['search']);
-            
-            if ($search == '0') {
                 $searchResults = $this->searchModel->getSearchResult($_COOKIE['search']);
-            } 
             
             if (!empty($searchResults)) {
                 setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
                 } else {
-                    $emptySearch = "К сожалению, ничего не найдено";
+                    $emptySearch;
                     setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
                 }
 
+        } else {
+            $emptySearch;
+            setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
         }
         
         $title = 'Поиск';
