@@ -23,9 +23,9 @@
         <p class="card-text "><?= $emptySearch; ?></p>
       </div>
       <? endif; ?>
-
+      <? if (isset($searchResults)): ?>
       <? foreach ($searchResults as $search_result): ?>
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="col-6">
         <div class="card shadow-sm d-flex flex-row">
           <div class="card-body ">
             <p class="card-text "><?= $search_result['product_name'] . " " . $search_result['product_art']; ?></p>
@@ -39,6 +39,7 @@
         </div>
       </div>
       <? endforeach; ?>
+      <? endif; ?>
     </div>
     
   </div>

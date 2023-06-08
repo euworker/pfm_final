@@ -31,6 +31,19 @@ class Search {
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
+    public function checkSearchResult($search)  {
+
+            // латинские. Долго ковырялся, так и не смог прикрутить кириллицу даже через 'u' не понимает
+            if ( preg_match("/^[А-Яа-яA-Za-z0-9_-]+$/u", $search)) {
+              
+                return '0';
+            } else {
+                
+                return '1';
+            }
+            
+    }
+
 
 
     

@@ -25,27 +25,29 @@ class SearchController {
         $search = htmlentities($_POST["search"]);
         // запписываем куки
         setcookie("search", $search, time() + 2 * 24 * 3600, path:'/');
-        // рефоешим страницу чтобы куки появились 
+        // рефрешим страницу чтобы куки появились 
         header("Refresh: 0"); 
-        // убиваем выполнение, чтобы записсать без ошибок $searchResults
+        // убиваем выполнение, чтобы записать без ошибок $searchResults
         die; 
     }
- 
-        // todo проверки !!! регулярки -> если проверка на регулярку не проходит, то записаваем ошибку в
-        // errors/ офибку придумаваем сами
-        // проверка - значение есть в таблице ! 
-        
-        if (empty($errors)) {
-            
-            $searchResults = $this->searchModel->getSearchResult($_COOKIE['search']);
-            
-        if (!empty($searchResults)) {
-            setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
-        } else {
-            $emptySearch = "К сожалению, ничего не найдено";
-        }
 
+
+
+        if (empty($errors)) {
+
+            $search = $this->searchModel->checkSearchResult($_COOKIE['search']);
             
+            if ($search == '0') {
+                $searchResults = $this->searchModel->getSearchResult($_COOKIE['search']);
+            } 
+            
+            if (!empty($searchResults)) {
+                setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
+                } else {
+                    $emptySearch = "К сожалению, ничего не найдено";
+                    setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
+                }
+
         }
         
         $title = 'Поиск';
@@ -53,13 +55,6 @@ class SearchController {
     
     
     }
-
-
-
-      
-        
-    // } 
-
 
 }
 
