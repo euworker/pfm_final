@@ -6,19 +6,30 @@
     </a>
     <? endif; ?> -->
 
-    <? if(isset($h1)) : ?>
 
-    <div class="container">
-        <h1><?= $h1 ?></h1>
-    </div>
-    <? endif; ?>
 
 
 
 <div class="container">
-    
+
+    <nav aria-label="breadcrumb ">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
+        <li class="breadcrumb-item active"><a href="<?= FULL_SITE_ROOT . 'product/'  . $product['group_translit'] ?>"><?= $product['group_name'] ?></a></li>          
+        <? if(isset($h1)) : ?>
+        <li class="breadcrumb-item active"><?= $h1 ?></li>
+        <? endif; ?>
+      </ol>
+    </nav>
+         
+    <? if(isset($h1)) : ?>
+      <div class="container">
+          <h1><?= $h1 ?></h1>
+      </div>
+    <? endif; ?>
 
         <div class="album py-2 py ">
+
     
           <div class="container">
          
