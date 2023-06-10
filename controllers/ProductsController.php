@@ -47,7 +47,8 @@ class ProductsController {
                 $empty = "К сожалению, пусто. Наполняем товарами)";
                 } else {
                     $h1 = $products[0]['group_name'];
-                    $title = 'Товары ' . $products[0]['group_name'];
+                    $title = $products[0]['group_name'] . PRODUCT_TITLE;
+                    $description = $products[0]['group_name']. PRODUCT_DESCRIPTION;
                 }
             // print('после' . $limit . ' ' . $offset);
             // print_r($products);
@@ -72,7 +73,8 @@ class ProductsController {
                 $empty = "К сожалению, пусто. Наполняем )";
             } else {
                 $h1 = $groups[0]['parent_group_name'];
-                $title = 'Товары ' . $groups[0]['parent_group_name'];
+                $title = $groups[0]['parent_group_name'] . PRODUCT_TITLE;
+                $description = $groups[0]['parent_group_name']. PRODUCT_DESCRIPTION;
             }
             // print('после' . $limit . ' ' . $offset);
             // print_r($products);
@@ -92,10 +94,6 @@ class ProductsController {
         $title = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_TITLE;
         $description = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_DESCRIPTION;
         $src = IMG_PRODUCT . $product['product_id']. '.jpeg';
-        // echo (file_exists(IMG_ROOT. $product['product_id']. '.jpeg'));
-        // die;
-        // проверка фото
-        // IMG_PRODUCT
         if (file_exists(IMG_ROOT. $product['product_id']. '.jpeg')) {
             // clearstatcache();
             $src = IMG_PRODUCT . $product['product_id']. '.jpeg';    
@@ -105,7 +103,7 @@ class ProductsController {
         }
          require_once("views/products/product_table.html");
 
-    } // todo сделать функцию mb_str_low, preg_replace - удалить всё кроме 
+    } 
 
 
 

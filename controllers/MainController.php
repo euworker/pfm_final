@@ -14,7 +14,7 @@ class MainController {
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
         $menu = new Menu();
-// переменная существет только до хапуска роутера
+// переменная существет только до запуска роутера
         $menuProducts = $menu -> getOneLevelNameGroups();
        
 
@@ -29,23 +29,8 @@ class MainController {
         
         // $manufacturers = $this->mainModel->getTotal();
         $mainGroups = $this->mainModel->getMainGroups();
-        
-        // echo (file_exists(IMG_ROOT. $product['product_id']. '.jpeg'));
-        // die;
-        // проверка фото
-        // IMG_PRODUCT
-        
-
-
-
-        // $total = $this->mainModel->getManufacturersTotal();
-        // $limit = 3;
-        // $currentPage = $page;
-        // $index = 'page=';
-        // $offset = ($page - 1) * $limit;
-        // $pagination = new Pagination($total, $currentPage, $limit, $index);
-        // $manufacturers = $this->mainModel->getAllManufacturersPaginated($limit, $offset);
-        $title = 'Главная страница';
+        $title = 'Платформа ИТ - интернет-магазин техники и электроники';
+        $description = 'Электроника и техника по выгодным ценам. Огромный ассортимент товаров, приятные цены, качественные консультации. Платформа ИТ - партнер для дома и бизнеса!';
         require_once("views/main/table.html");
 
 
