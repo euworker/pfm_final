@@ -12,6 +12,7 @@
     <meta name="description" content="<?= $description; ?>">
     <? endif; ?>
     <link rel="stylesheet" href="<?= LIBS . 'bootstrap/css/bootstrap.css' ?> " />
+    <link rel="stylesheet" href="<?= CSS . 'main.css' ?> " />
 </head>
 
 <body >
@@ -61,7 +62,7 @@
   <!-- Меню -->
 
   <div class="py-2 bg-body-tertiary border-bottom">
-    <div class="container d-flex flex-wrap ">
+    <div class="container d-flex flex-wrap justify-content-between">
       <a href="<?= FULL_SITE_ROOT . '' ?>">
       <!-- Лого -->
       <svg width="145" height="38" viewBox="0 0 145 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,34 +90,35 @@
       </a>
         <!-- Поиск -->
       <form method="POST"  
-      action="<?= SEARCH ?>" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+      action="<?= SEARCH ?>" class=" flex-grow-1 col-6 col-lg-auto mb-3 mb-lg-0 flex-grow-1" role="search">
         <input type="search" class="form-control main-search" placeholder="Поиск..." aria-label="Search" name="search">
       </form>
       <!-- корзина -->
-      <div class="cart col-12 col-lg-auto mb-3 mb-lg-0"><i class="fa-solid fa-basket-shopping"></i></div>
+      <div class=" cart col-3 col-lg-auto mb-3 mb-lg-0 my-3"><i class="fa-solid fa-basket-shopping"></i></div>
 
     </div>
   </div>
 
 <!-- основное меню -->
-  <nav class=" navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid d-flex flex-wrap">
+  <nav class=" navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+        <div class="container-fluid d-flex flex-wrap justify-content-between">
           <!-- flex-wrap  -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 container d-flex  ">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 container d-flex  justify-content-between flex-grow">
 
-              <li class="nav-item">
+              <li class="nav-item flex-grow-1 ">
                 
-                <div class="dropdown">
+                <a class="d-flex justify-content-center align-items-center nav-link <?= $title === 'Товары' ? 'active' : '' ?>" href="<?= FULL_SITE_ROOT . 'products' ?>" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="nav__bottom__item__icon fas fa-bars"></i>&nbsp;Каталог</a>
                   
-                  <a class=" nav-link <?= $title === 'Товары' ? 'active' : '' ?>" href="<?= FULL_SITE_ROOT . 'products' ?>" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="nav__bottom__item__icon fas fa-bars"></i> Каталог</a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    
-                    <li><a class="dropdown-item <?= $title === 'Каталог' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'groups' ?>">Все</a></li>
+                <div class="dropdown ">
+                  
+                  
+                  <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item  <?= $title === 'Каталог' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'groups' ?>">Все</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <? foreach ($menuProducts as $menuProduct) : ?>
                     <li><a class="dropdown-item" href="<?= FULL_SITE_ROOT . 'product' . '/' . $menuProduct['group_translit']?>"><?=  $menuProduct['group_name'] ?></a></li>
@@ -125,21 +127,21 @@
                   
                   </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link <?= $title === 'Акции' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'stocks' ?>">Акции</a>
+              <li class="nav-item flex-grow-1 ">
+                <a class="d-flex justify-content-center nav-link  <?= $title === 'Акции' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'stocks' ?>">Акции</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link <?= $title === 'Как купить?' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'how_to_buy' ?>">Как купить?</a>
+              <li class="nav-item flex-grow-1 align-items-center">
+                <a class="d-flex justify-content-center nav-link <?= $title === 'Как купить?' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'how_to_buy' ?>">Как купить?</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link <?= $title === 'Производители' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'manufacturers' ?>">Производители</a>
+              <li class="nav-item flex-grow-1 align-items-center">
+                <a class="d-flex justify-content-center nav-link <?= $title === 'Производители' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'manufacturers' ?>">Производители</a>
               </li>
                             
-              <li class="nav-item">
-                <a class="nav-link <?= $title === 'О нас' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'about' ?>">О нас</a>
+              <li class="nav-item flex-grow-1 align-items-center">
+                <a class="d-flex justify-content-center nav-link <?= $title === 'О нас' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'about' ?>">О нас</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link <?= $title === 'Контакты' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'contacts' ?>">Контакты</a>
+              <li class="nav-item flex-grow-1 align-items-center">
+                <a class="d-flex justify-content-center nav-link <?= $title === 'Контакты' ? 'active' : '' ?>" aria-current="page" href="<?= FULL_SITE_ROOT . 'contacts' ?>">Контакты</a>
               </li>
             </ul>
             <!-- <form class="d-flex">

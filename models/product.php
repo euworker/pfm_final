@@ -50,9 +50,10 @@ class Product {
     public function getById($id) {
         $query = "SELECT 
          `product_id`,`product_art`,`product_name`,`product_description`,`product_price`,`product_quantity`,
-        `product_img_link`, `product_manufacturer_id` AS `manufacturers_getById`, `group_parent_id`, `group_name`, `group_translit`
+        `product_img_link`, `product_manufacturer_id` AS `manufacturers_getById`, `manufacturer_name`, `group_parent_id`, `group_name`, `group_translit`
         FROM `products` 
         LEFT JOIN `groups` ON `group_id` = `product_group_id` 
+        LEFT JOIN `manufacturers` ON `manufacturer_id` = `product_manufacturer_id`
         WHERE   `product_id` = $id;
         ";
         $result = mysqli_query($this->connect, $query);

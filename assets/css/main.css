@@ -1,0 +1,7 @@
+.product_img_link { 
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 25%;
+    min-height: 25%;
+}
+
