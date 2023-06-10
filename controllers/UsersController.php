@@ -7,10 +7,15 @@ class UsersController {
     private $helper;
     private $isAuthorized;
 
+    private $productIdAddToCard;
+
     public function __construct() {
         $this->userModel = new User();
         $this->helper = new Helper();
         $this->isAuthorized = $this->userModel->checkIfUserAuthorized();
+        setcookie("product_id", "", time() + 2 * 24 * 3600, path:'/');
+        
+        // setcookie("", "", time() + 2 * 24 * 3600, path:'/');
     }
 
 

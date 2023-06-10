@@ -29,6 +29,14 @@ class MainController {
         
         // $manufacturers = $this->mainModel->getTotal();
         $mainGroups = $this->mainModel->getMainGroups();
+        
+        // echo (file_exists(IMG_ROOT. $product['product_id']. '.jpeg'));
+        // die;
+        // проверка фото
+        // IMG_PRODUCT
+        
+
+
 
         // $total = $this->mainModel->getManufacturersTotal();
         // $limit = 3;

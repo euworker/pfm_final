@@ -15,6 +15,7 @@ class Group {
     public function getGroupsCount() {
         $query = "SELECT count(*) AS `count`
                     FROM `groups` 
+                    WHERE `group_level` IN (1,2) 
                     ";
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_assoc($result)['count'];
@@ -40,6 +41,7 @@ class Group {
 
     public function getAllGroupsPaginated($limit, $offset) {
         $query = "SELECT * FROM `groups` 
+                    WHERE `group_level` IN (1,2) 
                     LIMIT $offset, $limit
                     ";
         $result = mysqli_query( $this->connect, $query);
