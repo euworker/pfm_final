@@ -49,6 +49,7 @@ public function getUserInfo($email,$hashedPassword) {
    
 }
 
+
 public function auth($userId, $token, $tokenTime) {
                 $query = "
             INSERT INTO `connects`

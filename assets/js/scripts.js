@@ -6,4 +6,3 @@ function remove(type, id) {
     }
 }
 
-

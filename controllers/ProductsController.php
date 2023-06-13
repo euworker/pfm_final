@@ -87,9 +87,10 @@ class ProductsController {
     
         
     public function actionProduct($group_name_translit,$product_id) {
+        
         if(isset($group_name_translit) && isset($product_id) )   
         $product = $this->productModel->getById($product_id);
-        
+        setcookie("products", $product['product_id'], time() + 2 * 24 * 3600, path:'/');
         $h1 = $product['product_name'] . ' ' . $product['product_art'];
         $title = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_TITLE;
         $description = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_DESCRIPTION;
@@ -102,6 +103,7 @@ class ProductsController {
             $src = PRODUCT_MANUFACTURER_GROUP_IMG;
         }
          require_once("views/products/product_table.html");
+         
 
     } 
 

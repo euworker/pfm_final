@@ -66,7 +66,9 @@ $routes = array (
         'products' => 'index'
     ),
 
-
+    'CartController' => array (
+        'cart' => 'index'    
+    ),
 
     'GroupController' => array (
         'groups/page=([0-9+])' => 'index/$1',

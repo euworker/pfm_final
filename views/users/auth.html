@@ -1,7 +1,26 @@
 <? include_once("views/common/header.html"); ?> 
 
-
 <div class="container">
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
+      <? if(isset($h1)) : ?>
+      <li class="breadcrumb-item active"><?= $h1 ?></li>
+      <? endif; ?>
+    </ol>
+  </nav>
+       
+  <? if(isset($h1)) : ?>
+    <div class="container">
+        <h1><?= $h1 ?></h1>
+    </div>
+  <? endif; ?>
+  
+  <div class="mb-3">
+    Если не зарегистрировались, то вам <a class="link-warning" aria-current="page" href="<?= USER . 'reg' ?>"> сюда</a>
+  </div>
+  
+
   <form method="POST">
     <div class="mb-3 ">
       <label class="form-label"  for="user_email">Адрес почты. Может содержать латиницу, кириллицу, "_", точку, цифры. Всего, не более 100 символов. </label> <br>
@@ -15,6 +34,11 @@
       
     </div>
 
+    
+    <? if (!empty($errors)) : ?>
+      <p class="border border-danger rounded"><? print($errors[0]) ?></p>
+    <? endif; ?>
+    
 
     <div class="mb-3 ">
     <button type="submit" class="btn btn-primary">

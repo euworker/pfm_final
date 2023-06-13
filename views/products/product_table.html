@@ -65,8 +65,10 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'groups' ?>"><button type="button" class="btn btn-sm btn-outline-primary">В корзину</button>
-                          </a>
+                        <form method="POST" action="<?= FULL_SITE_ROOT . 'cart' ?>">
+                          <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>"><button type="submit" class="btn btn-sm btn-outline-primary" name="addToCart">В корзину</button>
+                            </a>
+                        </form>
                       </div>
                     </div>
                   </div>

@@ -13,14 +13,14 @@ class UsersController {
         $this->userModel = new User();
         $this->helper = new Helper();
         $this->isAuthorized = $this->userModel->checkIfUserAuthorized();
-        setcookie("product_id", "", time() + 2 * 24 * 3600, path:'/');
-        
-        // setcookie("", "", time() + 2 * 24 * 3600, path:'/');
+        // setcookie("products", '', time() + 2 * 24 * 3600, path:'/');
+        // $this->productIdAddToCard = setcookie("products", '', time() + 2 * 24 * 3600, path:'/');
     }
 
 
     public function actionReg(){
-
+        $h1 = 'Регистрация';
+        $title = 'Регистрация';
         
 
         $errors = [];
@@ -36,9 +36,11 @@ class UsersController {
 
             if (email_check($email) === 1 || check_length($email,5,100)) {
                 $errors[] = "Не корректные данные в поле 'email'";
+
             } else {
             if (($password !== $passwordRepeat) || (empty($password) || empty($passwordRepeat)) || password_check($password) === 1) {
                 $errors[] = "Пароли не совпадают, пусты или не корректны ";
+
             } else {
                 $count = $this->userModel->checkIfUserExists($email);
                 //    проверяем наличие емаил 
@@ -49,53 +51,36 @@ class UsersController {
                 if (empty($errors)) {
                     // шифруем пароль
                     $hashedPassword = md5($password);
+                    print_r(' сделал md5');
                     $this->userModel->register($email,$hashedPassword);
-
-                    // _________________________________________ повторяю данные из авторизации 
-
-                    //________________ переписать под ооп??? в отдельном классе или в файл functions? Есть же новый
-                    // $query = "
-                    // SELECT COUNT(*) as `count`, `user_id`
-                    // FROM `users`
-                    // WHERE `user_email` = '$email' AND `user_password`= '$hashPassword';
-                    // ";
-                    // $result = mysqli_query($connect, $query);
-                    // $userInfo = mysqli_fetch_assoc($result);
+                    print_r(' сделал register');
+                    $userInfo = $this->userModel->getUserInfo($email,$hashedPassword);
+                    print_r(' сделал getUserInfo');
 
 
-                    // $token = generateToken();
-                    // // нужно пересоздавать токен чаще
-                    // $tokenTime = time() + 30 * 60;
-                    // $userId = $userInfo['user_id'];
+                    $token = generateToken();
+                    print_r(' сделал generateToken');
+                    // нужно пересоздавать токен чаще
+                    $tokenTime = time() + 30 * 60;
+                    print_r(' сделал time');
+                    $userId = $userInfo['user_id'];
+                    print_r(' сделал userId');
 
-                    // $query = "
-                    // INSERT INTO `connects`
-                    // SET 
-                    // `connect_user_id` = $userId,
-                    // `connect_token` = '$token',
-                    // `connect_token_time` = FROM_UNIXTIME($tokenTime);
-                    // ";
-                    // mysqli_query($connect,$query);
+                    $this->userModel->auth($userId, $token, $tokenTime) ;
+                    print_r(' сделал auth');
                     
+                    setcookie("uid", $userInfo['user_id'], time() + 2 * 24 * 3600, path:'/');
+                    //кука для токена
+                    setcookie("t", $token, time() + 2 * 24 * 3600, path:'/');
+                    // кука токентайма
+                    setcookie("tt", $tokenTime, time() + 2 * 24 * 3600, path:'/');
 
-                    // // назвение куки, value, время жизни 2 дня, доступен на всем сайте
-                    // setcookie("uid", $userInfo['user_id'], time() + 2 * 24 * 3600, path:'/');
-                    // //кука для токена
-                    // setcookie("t", $token, time() + 2 * 24 * 3600, path:'/');
-                    // // кука токентайма
-                    // setcookie("tt", $tokenTime, time() + 2 * 24 * 3600, path:'/');
+                    //   не срабатывает хедер локейшен, не перезаписывается dob (это мы и не передаем) !!!!!!!!!!!!!!!!!!!
+                    header("Location: ".$_SERVER['HTTP_REFERER']);
 
-                    // // _________________________________________________________ конец функциональности из авторизации  
-
-                    // mysqli_close($connect);
-                    //________________ всё, что выше переписать под ооп, в отдельном классе или в файл functions
-
-
-                    header("Location: " . FULL_SITE_ROOT . "manufacturers");
-
-                    }
-
+                    } 
                 }
+                
             }
 
     
@@ -107,13 +92,13 @@ class UsersController {
     }
 
     public function actionAuth(){
-
+        $h1 = 'Авторизация';
+        $title = 'Авторизация';
 $errors = [];
-     // пераписать под ООП functions
+     // подключаем файл с проверками
      include_once("functions.php");
 
 if (isset($_POST['user_email'])) {
-// написать проверки что это емаеил - регулярками
     $email = clean($_POST['user_email']);
     $password = clean($_POST['user_password']);
     
@@ -122,7 +107,7 @@ if (isset($_POST['user_email'])) {
         $errors[] = "Не корректные данные в поле 'email'";
     } else {
     if (empty($password) || password_check($password) === 1) {
-        $errors[] = "Пароли не совпадают, пусты или не корректны ";
+        $errors[] = "Пароль не корректен";
     } else {
         $hashedPassword = md5($password);
 
@@ -166,13 +151,16 @@ if (isset($_POST['user_email'])) {
             // кука токентайма
             setcookie("tt", $tokenTime, time() + 2 * 24 * 3600, path:'/');
 
-            header("Location: " . FULL_SITE_ROOT . "manufacturers");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
 
         }
 
     }
 
-    
+    if(!empty($errors)) {
+        print_r($errors);
+
+    }
 }
 
 

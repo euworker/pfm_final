@@ -5,3 +5,9 @@
     min-height: 25%;
 }
 
+.product_img_link_cart { 
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 25%;
+    min-height: 25%;
+}
