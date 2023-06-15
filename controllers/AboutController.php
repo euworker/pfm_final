@@ -7,6 +7,7 @@ class AboutController {
     private $groupModel;
     private $aboutModel;
     public $isAuthorized;
+    public $menuProducts;
 
     public function __construct() {
         $this->aboutModel = new About();
@@ -14,6 +15,9 @@ class AboutController {
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
         $this->groupModel = new Group();
         $menuProducts = $this-> groupModel->getOneLevelNameGroups();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+      
     }
 
     

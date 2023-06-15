@@ -6,6 +6,7 @@ class ProductsController {
     private $manufacturerModel;
     private $groupModel;
     public $isAuthorized;
+    public $menuProducts;
 
 
     public function __construct() {
@@ -13,6 +14,9 @@ class ProductsController {
         $this->manufacturerModel = new Manufacturer();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+        
     }
 
     public function actionIndex($page = 1) { 

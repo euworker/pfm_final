@@ -8,13 +8,15 @@ class SearchController {
     private $groupModel;
     public $isAuthorized;
     // public $searchResults;
-    // public $menuProducts;
+    public $menuProducts;
 
     public function __construct() {
         $this->searchModel = new Search();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
         // $this->searchResults = setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
 
     }
         // $this->groupModel = new Group();
@@ -26,6 +28,7 @@ class SearchController {
         $emptySearch = "К сожалению, ничего не найдено";
         // $search = [0];
         if (isset($_POST["search"])) {
+            // дописать проверку на то что он пост и нужно  толкьо записать  куки
         $search = htmlentities($_POST["search"]);
         $searchCheck = $this->searchModel->checkSearchResult($_COOKIE['search']);
         

@@ -6,12 +6,15 @@ class StocksController {
     private $groupModel;
     private $stockModel;
     public $isAuthorized;
+    public $menuProducts;
 
     public function __construct() {
         $this->stockModel = new Stock();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
-        // $this->groupModel = new Group();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+
     }
 
     public function actionIndex($page = 1) { 

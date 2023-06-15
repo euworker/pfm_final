@@ -6,18 +6,21 @@ class MainController {
 
     private $mainModel;
     public $isAuthorized;
+    public $menuProducts;
 
 
 
     public function __construct() {
+        global $menuProducts;
         $this->mainModel = new Main();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
-        $menu = new Menu();
-// переменная существет только до запуска роутера
-        $menuProducts = $menu -> getOneLevelNameGroups();
-       
-
+        $this->menuProducts = $menuProducts;
+//         $menu = new Menu();
+// // переменная существет только до запуска роутера
+//         $menuProducts = $menu -> getOneLevelNameGroups();
+        // print_r($menuProducts);
+        // die;
     }
 
     

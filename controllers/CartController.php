@@ -12,15 +12,30 @@ class CartController {
 
     public $isAuthorized;
     public $menuGroup;
+    public $menuProducts;
 
     public function __construct() {
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
         $this->mainModel = new Main();
         $this->productModel = new Product();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+        
           
     }
 
+    // [18:47] Pavel A. Plyuhov
+
+// ['1' => 1, '2' => 4]
+
+// [18:48] Pavel A. Plyuhov
+
+// { '1' => 1, '2' => 4 }
+
+// [18:50] Pavel A. Plyuhov
+
+// $arr[id] = 1; $arr[id] +=1; 
 
     public function actionIndex() {
             $mainGroups = $this->mainModel->getMainGroups();

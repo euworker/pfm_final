@@ -16,6 +16,11 @@ class MenuController {
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
         $this->menuProducts = $this-> menuModel->getOneLevelNameGroups();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+        
+        
+        
     }
 
 // public function links() {

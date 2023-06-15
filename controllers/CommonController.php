@@ -15,7 +15,10 @@ class CommonController {
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
         $this->groupModel = new Group();
-        $this->menuProducts = $this-> groupModel->getOneLevelNameGroups();
+        // $this->menuProducts = $this-> groupModel->getOneLevelNameGroups();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+        
         
     }
 

@@ -6,12 +6,16 @@ class GroupController {
 
     private $groupModel;
     public $isAuthorized;
-    // public $menuProducts;
+    public $menuProducts;
 
     public function __construct() {
         $this->groupModel = new Group();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+        
+        
     }
 
     public function actionIndex($page = 1) { 

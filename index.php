@@ -11,13 +11,16 @@ require_once("components/autoload.php");
 
 //include_once("views/common/header.html");
 
-
-
+$menu = new Menu();
+$menuProducts = $menu -> getOneLevelNameGroups();
+// print_r($menuProducts);
+// die;
+// $menuProducts = $menu -> links();
 $router = new Router();
 //  дописать  модель и сонтроллер ддля вывода данных в хедере
-// $menu = new Menu();
+ 
 // // переменная существет только до хапуска роутера
-// $menuProducts = $menu -> getOneLevelNameGroups();
+
 // print_r($menuProducts);
 
 

@@ -8,11 +8,15 @@ class UsersController {
     private $isAuthorized;
 
     private $productIdAddToCard;
+    public $menuProducts;
 
     public function __construct() {
         $this->userModel = new User();
         $this->helper = new Helper();
         $this->isAuthorized = $this->userModel->checkIfUserAuthorized();
+        global $menuProducts;
+        $this->menuProducts = $menuProducts;
+        
         // setcookie("products", '', time() + 2 * 24 * 3600, path:'/');
         // $this->productIdAddToCard = setcookie("products", '', time() + 2 * 24 * 3600, path:'/');
     }
@@ -74,7 +78,9 @@ class UsersController {
                     setcookie("t", $token, time() + 2 * 24 * 3600, path:'/');
                     // кука токентайма
                     setcookie("tt", $tokenTime, time() + 2 * 24 * 3600, path:'/');
-
+                    // print_r($_SERVER['HTTP_REFERER']);
+                    // die;
+                    // до вызова реги сохранить в куках 'HTTP_REFERER'
                     //   не срабатывает хедер локейшен, не перезаписывается dob (это мы и не передаем) !!!!!!!!!!!!!!!!!!!
                     header("Location: ".$_SERVER['HTTP_REFERER']);
 
