@@ -30,14 +30,20 @@
 
           <div class=" mb-6 " >
              <!-- style="max-width: 540px;" -->
+             <? $summ = 0; ?>
+             <? foreach($products as $item): ?>
+             <? $product = $item['product']; ?>
+             <? $summ += $item['count'] * $product['product_price']; ?>
             <div class="card-image  row g-0 d-flex justify-content-around">
               <div class=" col-md-5 m-1 flex-grow-1 d-flex justify-content-center align-items-center border rounded shadow-sm"> 
                 <!-- flex-grow-1 -->
                   <!-- d-flex flex-wrap justify-content-between align-items-start col-sm -->
+
                 <img class="product_img_link " 
-                 src=" <?= $src; ?> " 
+                 src=" <?= $item['image']; ?> " 
                  alt="<?= $product['product_name']; ?> <?= $product['product_art']; ?>">
               </div>
+
               <div class="card col-md-5 m-1 flex-grow-1 shadow-sm ">
                 <div class="card-body">
                   <div class="card-text product-name">
@@ -61,19 +67,32 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <form method="POST" action="<?= FULL_SITE_ROOT . 'cart' ?>">
-                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>"><button type="submit" class="btn btn-sm btn-outline-primary" name="addToCart">В корзину</button>
-                          </a>
+                        <input type="hidden" name="productId" value="<?= $product['product_id']; ?>" >
+                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
+                          <button type="submit" class="btn btn-sm btn-outline-primary" name="addToCart"> + </button>
+                        </a>
+                        <div class="card-text product-manufacturer">
+                          <p class="product-manufacturer__title"><?= $item['count']; ?></p>
+                        </div>
+                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
+                          <button type="submit" class="btn btn-sm btn-outline-primary" name="removeFromCart"> - </button>
+                        </a>
+                        
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
+              
+
             </div>
           </div>
        
-           
+          <? endforeach; ?> 
           </div>
+
           
+          <?= $summ ; ?>
         </div>
 
 

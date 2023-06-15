@@ -25,41 +25,46 @@ class SearchController {
     public function actionIndex(){
         
         $errors = [];
-        $emptySearch = "К сожалению, ничего не найдено";
+        
         // $search = [0];
         if (isset($_POST["search"])) {
             // дописать проверку на то что он пост и нужно  толкьо записать  куки
-        $search = htmlentities($_POST["search"]);
-        $searchCheck = $this->searchModel->checkSearchResult($_COOKIE['search']);
-        
-        if ($searchCheck == '1') {
-            $errors = [$emptySearch];
-        }
-        
-        // запписываем куки
-        setcookie("search", $search, time() + 2 * 24 * 3600, path:'/');
-        // рефрешим страницу чтобы куки появились 
-        header("Refresh: 0"); 
-        // убиваем выполнение, чтобы записать без ошибок $searchResults
-        die; 
-    }
-    
-        if (empty($errors)) {
+            $search = htmlentities($_POST["search"]);
 
-            if (isset($_COOKIE['search'])) {
-                $searchResults = $this->searchModel->getSearchResult($_COOKIE['search']);
-            } 
-
-            if (!empty($searchResults)) {
-                    setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
+            if (isset($search) ){
+                $searchCheck = $this->searchModel->checkSearchResult($search);
+                if ($searchCheck == '0') { 
+                    setcookie("search", $search, time() + 2 * 24 * 3600, path:'/');
                 } else {
-                    $emptySearch;
                     setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
-                    
                 }
+            } 
+        
+            // запписываем куки
+            // setcookie("search", $search, time() + 2 * 24 * 3600, path:'/');
+            // рефрешим страницу чтобы куки появились 
+            header("Refresh: 0"); 
+            // убиваем выполнение, чтобы записать без ошибок $searchResults
+            die; 
+        }
+    
+        if (!empty($_COOKIE['search'])) {
+
+            $searchResults = $this->searchModel->getSearchResult($_COOKIE['search']);
+            if (empty($searchResults)) {
+                $emptySearch = "К сожалению, ничего не найдено";
+                setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
+            }
+            // if (!empty($searchResults)) {
+            //         setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
+            //     } else {
+            //         $emptySearch;
+            //         setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
+                    
+            //     }
 
         } else {
-            $emptySearch;
+            $emptySearch = "К сожалению, ничего не найдено";
             setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
         }
         

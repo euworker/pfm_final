@@ -66,6 +66,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                         <form method="POST" action="<?= FULL_SITE_ROOT . 'cart' ?>">
+                          <input type="hidden" name="productId" value="<?= $product['product_id']; ?>" >
                           <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>"><button type="submit" class="btn btn-sm btn-outline-primary" name="addToCart">В корзину</button>
                             </a>
                         </form>
