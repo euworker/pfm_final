@@ -18,6 +18,7 @@ $routes = array (
         'manufacturer/add' => 'add',
         'manufacturer/edit/([0-9+])' => 'edit/$1',
         'manufacturer/delete/([0-9+])' => 'delete/$1',
+        'manufacturer/([0-9]+)' => 'index',
         'manufacturers/page=([0-9+])' => 'index/$1',
         'manufacturers' => 'index'
     ),

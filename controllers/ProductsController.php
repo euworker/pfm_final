@@ -80,8 +80,6 @@ class ProductsController {
                 $title = $groups[0]['parent_group_name'] . PRODUCT_TITLE;
                 $description = $groups[0]['parent_group_name']. PRODUCT_DESCRIPTION;
             }
-            // print('после' . $limit . ' ' . $offset);
-            // print_r($products);
 
     
             require_once("views/products/table.html");
@@ -94,7 +92,7 @@ class ProductsController {
         
         if(isset($group_name_translit) && isset($product_id) )   
         $product = $this->productModel->getById($product_id);
-        setcookie("products", $product['product_id'], time() + 2 * 24 * 3600, path:'/');
+        // setcookie("products", $product['product_id'], time() + 2 * 24 * 3600, path:'/');
         $h1 = $product['product_name'] . ' ' . $product['product_art'];
         $title = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_TITLE;
         $description = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_DESCRIPTION;

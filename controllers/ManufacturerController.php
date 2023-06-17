@@ -31,6 +31,7 @@ class ManufacturerController {
         $pagination = new Pagination($total, $currentPage, $limit, $index);
         $manufacturers = $this->manufacturerModel->getAllPaginated($limit, $offset);
         $title = 'Производители';
+        $src = PRODUCT_MANUFACTURER_GROUP_IMG;
         require_once("views/manufacturers/table.html");
 
 

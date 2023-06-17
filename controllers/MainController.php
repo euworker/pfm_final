@@ -11,10 +11,10 @@ class MainController {
 
 
     public function __construct() {
-        global $menuProducts;
         $this->mainModel = new Main();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+        global $menuProducts;
         $this->menuProducts = $menuProducts;
 //         $menu = new Menu();
 // // переменная существет только до запуска роутера
