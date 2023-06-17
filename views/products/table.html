@@ -15,7 +15,9 @@
   <nav aria-label="breadcrumb ">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
-      <li class="breadcrumb-item active"><?= $h1 ?></li>
+      <? if(isset($h1)) : ?>
+        <li class="breadcrumb-item active"><?= $h1 ?></li>
+      <? endif; ?>
     </ol>
   </nav>
 
@@ -104,17 +106,18 @@
               <? endif; ?>
 
             </div>
+            <? if(!isset($empty)) : ?>
+
+              <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
+            <? endif; ?>
+
             
           </div>
 
-          <? if(!isset($empty)) : ?>
-          <div class="container">
-            <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
-          </div>
-        <? endif; ?>
+
           
  
-      
+</div>      
       
 </div>
 

@@ -68,6 +68,8 @@ $routes = array (
     ),
 
     'CartController' => array (
+        'cart/order' => 'order',
+        'cart/success' => 'success',
         'cart' => 'index'    
     ),
 

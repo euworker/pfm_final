@@ -82,7 +82,7 @@ class UsersController {
                     // die;
                     // до вызова реги сохранить в куках 'HTTP_REFERER'
                     //   не срабатывает хедер локейшен, не перезаписывается dob (это мы и не передаем) !!!!!!!!!!!!!!!!!!!
-                    header("Location: ".$_SERVER['HTTP_REFERER']);
+                    header("Location: " . FULL_SITE_ROOT . 'cart');
 
                     } 
                 }
@@ -116,19 +116,6 @@ if (isset($_POST['user_email'])) {
         $errors[] = "Пароль не корректен";
     } else {
         $hashedPassword = md5($password);
-
-        // $connect = connect();
-        // $query = "
-        // SELECT COUNT(*) as `count`, `user_id`
-        // FROM `users`
-        // WHERE `user_email` = '$email' AND `user_password`= '$hashedPassword';
-        // ";
-        // $result = mysqli_query($connect, $query);
-        // $userInfo = mysqli_fetch_assoc($result);
-        // $count = $userInfo['count']; 
-        //    проверяем наличие емаил 
-
-
         $userInfo = $this->userModel->getUserInfo($email,$hashedPassword);
         if ($userInfo['count'] === "0")  {
             $errors[] = "Такой связки email/пароль не существует";
@@ -139,15 +126,6 @@ if (isset($_POST['user_email'])) {
             // нужно пересоздавать токен чаще
             $tokenTime = time() + 30 * 60;
             $userId = $userInfo['user_id'];
-
-            // $query = "
-            // INSERT INTO `connects`
-            // SET 
-            // `connect_user_id` = $userId,
-            // `connect_token` = '$token',
-            // `connect_token_time` = FROM_UNIXTIME($tokenTime);
-            // ";
-            // mysqli_query($connect,$query);
             $this->userModel->auth($userId, $token, $tokenTime);
 
             // назвение куки, value, время жизни 2 дня, доступен на всем сайте
@@ -157,7 +135,7 @@ if (isset($_POST['user_email'])) {
             // кука токентайма
             setcookie("tt", $tokenTime, time() + 2 * 24 * 3600, path:'/');
 
-            header("Location: " . $_SERVER['HTTP_REFERER']);
+            header("Location: " . FULL_SITE_ROOT . 'cart');
 
         }
 
@@ -187,7 +165,7 @@ if (isset($_POST['user_email'])) {
         // кука токентайма
         setcookie("tt", 0, time() - 2 * 24 * 3600, path:'/');
 
-        header("Location: " . FULL_SITE_ROOT . "manufacturers");
+        header("Location: " . FULL_SITE_ROOT );
     }
 
 

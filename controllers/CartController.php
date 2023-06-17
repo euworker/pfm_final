@@ -29,16 +29,19 @@ class CartController {
             $mainGroups = $this->mainModel->getMainGroups();
             $title = 'Корзина';
             $h1 = 'Корзина';
-            
+            $errors = [];
             if(isset($_POST['productId'])  && ( isset($_POST['addToCart']) || isset($_POST['removeFromCart'] ))) {
                 $product = $this->productModel->getById($_POST['productId']);
                 $cart = [];
                 if (isset($_COOKIE["cart"])) {
                     $cart = unserialize($_COOKIE["cart"]);  
                 } 
+                
                 if (array_key_exists($product['product_id'],$cart)) {
                     if ( isset($_POST['addToCart'])) {
-                        $cart[$product['product_id']] += 1;
+                        if ($cart[$product['product_id']] < $product['product_quantity'] ) {
+                            $cart[$product['product_id']] += 1;   
+                        }
                     } else {
                         $cart[$product['product_id']] -= 1;
                         if ($cart[$product['product_id']] < 1) {
@@ -84,6 +87,26 @@ class CartController {
         
     }
 
+
+
+    public function actionOrder() {
+        $mainGroups = $this->mainModel->getMainGroups();
+            $title = 'Ваш заказ';
+            $h1 = 'Ваш заказ';
+        // addOrder    дописать
+        if(isset($_POST['addOrder']) && !empty($_COOKIE["cart"]) && $this->isAuthorized )  {
+            $cart = unserialize($_COOKIE["cart"]);
+
+            $order = $this->cartModel->insertOrder($_COOKIE['uid'], $cart);
+            if ($order) {
+                setcookie("cart", "", time()+ 60 * 60 * 24 * 365, path:'/');
+            }
+
+        }
+        //  во вью проверяем, что order существует и что он не false, то выводим сообщение, что заказ оформлен
+        require_once("views/cart/table_order.html");
+        // если не оформлен, то передает что-то не так.
+    }
     
 }
 

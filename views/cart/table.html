@@ -67,6 +67,8 @@
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
+                      
+                      
                       <form method="POST" action="<?= FULL_SITE_ROOT . 'cart' ?>">
                         <input type="hidden" name="productId" value="<?= $product['product_id']; ?>" >
                         <div class="d-flex justify-content-between align-items-center">
@@ -76,13 +78,14 @@
                           <div class="product-cart_quantity">
                             <p class="product_q"><?= $item['count']; ?></p>
                           </div>
-                          <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
-                            <button type="submit" class="btn btn-sm btn-outline-primary switch_btn " name="addToCart"> > </button>
-                          </a>
+                          <? if($item['count'] < $product['product_quantity']) : ?>
+                            <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
+                              <button type="submit" class="btn btn-sm btn-outline-primary switch_btn " name="addToCart"> > </button>
+                            </a>
+                          <? endif; ?>
                         </div>
-
-                      
                       </form>
+
                     </div>
                   </div>
                 </div>
@@ -97,13 +100,24 @@
           <? endif; ?>
           <? if ($summ > 0) : ?>
           <div class="my-1 px-6 d-flex justify-content-around align-items-center border rounded shadow-sm">
-          <h4>
-          Итого: <?= $summ ; ?>&nbsp;&#8381;
-          </h4>
-          <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
-            <button type="submit" class=" btn btn-sm btn-primary" name="addOrder"> Оформить заказ </button>
-          </a>
+            <form action="<?= FULL_SITE_ROOT . 'cart/order' ?>" method="POST"></form>
+              <input type="hidden" value="<?= $summ ; ?>" >
+              <h4>
+                Итого: <?= $summ ; ?>&nbsp;&#8381;
+              </h4> 
+              <? if($this->isAuthorized) : ?>
+              <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart/order' ?>">
+                <button type="submit" class=" btn btn-sm btn-primary" name="addOrder"> Оформить заказ </button>
+              </a>
+              <? else : ?>
+              <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'user/auth' ?>">
+                <button type="submit" class=" btn btn-sm btn-primary" name="addOrder"> Оформить заказ </button>
+              </a>
+              <? endif; ?>
+
+            </form>
           </div>
+          
           <? endif; ?>
           </div>
 
