@@ -2,7 +2,7 @@
 
     <?php
 
-class SearchController {
+class SearchController  {
 
     private $searchModel;
     private $groupModel;

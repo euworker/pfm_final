@@ -1,7 +1,7 @@
 
 <?php 
 
-class UsersController {
+class UsersController  {
 
     private $userModel;
     private $helper;

@@ -23,12 +23,16 @@
       <? if(isset($order) && isset ($_POST['orderSumm'])) : ?>
         <div class="container">
             <p> Заказ № <?= $order ?> на сумму <?= $_POST['orderSumm'] ?>&nbsp;руб. успешно оформлен. С вами свяжутся в самое ближайшее время для уточнения подробностей заказа.</p>
-        </div>
+            <br>
+            <br>
+          </div>
       <? else: ?>
       <div class="container">
         <p> Что-то не так! Позвоните по телефону <a class="address__item" href="tel:+78124567007"><i class="fas fa-phone-alt"></i>&nbsp;+7&nbsp;(812)&nbsp;456-70-07</a> или напишите на почту <a class="address__item"
           href="mailto:platform-it@yandex.ru"><i class="fas fa-envelope"></i>&nbsp;platform-it@yandex.ru</a> . </p>
-      </div>
+          <br>
+          <br>
+        </div>
       
       <div class="middle-description  bg-light">Популярные категории</div>
         <div class="album py-2 py ">

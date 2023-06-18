@@ -28,7 +28,12 @@ class Router {
                     $requestedController = new $controller();
                     $requestedAction = "action" . ucfirst($action);
                     // $requestedController->$requestedAction();
-                    call_user_func_array(array($requestedController, $requestedAction), $actionWithParametersArray);
+                    try{
+                        call_user_func_array(array($requestedController, $requestedAction), $actionWithParametersArray);
+                        } catch (Exception $e) {
+                        echo "Ошибка";
+                        }
+                    
                     break 2;
 
                 }

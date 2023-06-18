@@ -24,7 +24,13 @@ public function insertOrder($userId, $cart_user){
         $order_id = current($order_id);
 
         foreach ($cart_user as $key => $item) {
-            $query = "INSERT INTO `carts` (`cart_product_id`, `cart_product_count` , `cart_order_id`) 
+            //  по key нужно найти товар и вытащить его цену
+
+
+            // $cart_product_price = 
+            $query = "INSERT INTO `carts` (`cart_product_id`, `cart_product_count` , `cart_order_id`, 
+            -- `cart_product_price`
+            ) 
             VALUES ('$key', '$item', '$order_id' )";
             mysqli_query( $this->connect, $query);
 

@@ -27,7 +27,7 @@ class AboutController {
         
         $title = 'О нас';
         require_once("views/about/about_table.html");
-
+        
 
 
     }

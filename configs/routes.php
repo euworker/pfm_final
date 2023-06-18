@@ -49,7 +49,11 @@ $routes = array (
     //     'products/([0-9]+)' => 'index',
     //     'products' => 'index'
     // ),
-
+    
+     
+    'ErrorController' => array (
+        'errors/404' => '404',   
+    ),
 
     'ProductsController' => array (
 

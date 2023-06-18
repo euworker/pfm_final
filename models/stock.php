@@ -21,12 +21,24 @@ class Stock {
     }
 
     public function getNameStocks() {
-        $query = "SELECT *
+        $query = "SELECT * 
                     FROM `stocks` 
+                    LEFT JOIN `products` ON  `stock_product_id` = `product_id`
                     ";
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
+
+    public function getNameGroupByProductId($product_id) {
+        $query = "SELECT `group_translit`
+                    FROM `groups` 
+                    WHERE `group_id` = $product_id
+                    ";
+        $result = mysqli_query( $this->connect, $query);
+        return mysqli_fetch_assoc($result);
+
+    }
+
 
 
     public function getAllStocksPaginated($limit, $offset) {

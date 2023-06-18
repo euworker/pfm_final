@@ -89,9 +89,18 @@ class ProductsController {
     
         
     public function actionProduct($group_name_translit,$product_id) {
+        if(isset($group_name_translit) && isset($product_id) ) 
+        // проверяем что цифры, то true  
+        // if (!preg_match('/\d/i', $product_id )) {
+        //     header('Location: '. FULL_SITE_ROOT . 'errors/404');
+        // }
+
+        try{
+            $product = $this->productModel->getById($product_id);
+            } catch (Exception $e) {
+                header('Location: '. FULL_SITE_ROOT . 'errors/404');
+            }
         
-        if(isset($group_name_translit) && isset($product_id) )   
-        $product = $this->productModel->getById($product_id);
         // setcookie("products", $product['product_id'], time() + 2 * 24 * 3600, path:'/');
         $h1 = $product['product_name'] . ' ' . $product['product_art'];
         $title = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_TITLE;

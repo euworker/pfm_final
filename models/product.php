@@ -50,14 +50,22 @@ class Product {
     public function getById($id) {
         $query = "SELECT 
          `product_id`,`product_art`,`product_name`,`product_description`,`product_price`,`product_quantity`,
-        `product_img_link`, `product_manufacturer_id` AS `manufacturers_getById`, `manufacturer_name`, `group_parent_id`, `group_name`, `group_translit`
+        `product_img_link`, `product_manufacturer_id` AS `manufacturers_getById`, `manufacturer_name`, `group_parent_id`, `group_name`, `group_translit`, `stock_products_price`
         FROM `products` 
         LEFT JOIN `groups` ON `group_id` = `product_group_id` 
         LEFT JOIN `manufacturers` ON `manufacturer_id` = `product_manufacturer_id`
+        LEFT JOIN `stocks` ON `stock_product_id` = `product_id`
         WHERE   `product_id` = $id;
         ";
         $result = mysqli_query($this->connect, $query);
-        return mysqli_fetch_assoc($result);
+        $arr = mysqli_fetch_assoc($result);
+        // провервка в модели 
+        if (empty($arr['product_id'])) {
+            // если, пустой или ошибка, то try отловит
+            throw new Exception(' Error ');
+        }
+        
+        return $arr;
     }
 
     public function getProductsByNameTranslitGroup($group_name_translit, $limit, $offset) {
@@ -74,9 +82,7 @@ class Product {
         (SELECT `group_translit`
                 FROM `groups` 
                 WHERE `group_id` = '$parent_group_id') as `parent_group_name`
-        -- `warehouse_name`,
         FROM `products`
-        -- LEFT JOIN `warehouses` ON `product_warehouse_id` = `warehouse_id`
         LEFT JOIN `manufacturers` ON `product_manufacturer_id` = `manufacturer_id`
         LEFT JOIN `groups` ON `group_id` = `product_group_id`
         WHERE (`product_is_deleted` = 0 OR `product_is_deleted` is null OR `product_is_deleted` ='') AND `group_translit` = '$group_name_translit'
@@ -225,11 +231,10 @@ class Product {
     public function getProductByGroup($group_id) {
         $query ="SELECT `product_id`, `product_art`, `product_name`, `product_description`, `product_price`, `product_quantity`, 
                     `product_img_link`, `manufacturer_name`, `manufacturer_id`
-                    -- `warehouse_name`,
                 FROM `products`
-                -- LEFT JOIN `warehouses` ON `product_warehouse_id` = `warehouse_id`
                 LEFT JOIN `manufacturers` ON `product_manufacturer_id` = `manufacturer_id`
                 LEFT JOIN `groups` ON `product_group_id` = `group_id`
+
                 WHERE (`product_is_deleted` = 0 OR `product_is_deleted` is null OR `product_is_deleted` ='') AND `product_group_id` = $group_id
                 GROUP BY `product_id`
                 ORDER BY `product_id` DESC
