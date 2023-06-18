@@ -33,7 +33,7 @@
           <? foreach($products as $item): ?>
           <? $product = $item['product']; ?>
           <? $summ += $item['count'] * $product['product_price']; ?>
-          <div class=" mb-6 " >
+          <div class=" mb-5 " >
             
             <div class="card-image row g-0 d-flex justify-content-around">
               <div class=" col-md-5 m-1 flex-grow-1 d-flex justify-content-center align-items-center border rounded bg-white shadow-sm"> 
@@ -99,23 +99,23 @@
           <? endforeach; ?> 
           <? endif; ?>
           <? if ($summ > 0) : ?>
-          <div class="my-1 px-6 d-flex justify-content-around align-items-center border rounded shadow-sm">
-            <form action="<?= FULL_SITE_ROOT . 'cart/order' ?>" method="POST"></form>
-              <input type="hidden" value="<?= $summ ; ?>" >
+          <div class="my-1 px-5 d-flex justify-content-around align-items-center border rounded shadow-sm">
+            <? if($this->isAuthorized) : ?>
+            <form method="POST" action="<?= FULL_SITE_ROOT . 'cart/order' ?>" >
+              <input type="hidden" value="<?= $summ ; ?>" name="orderSumm">
               <h4>
                 Итого: <?= $summ ; ?>&nbsp;&#8381;
               </h4> 
-              <? if($this->isAuthorized) : ?>
+              
               <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart/order' ?>">
                 <button type="submit" class=" btn btn-sm btn-primary" name="addOrder"> Оформить заказ </button>
               </a>
-              <? else : ?>
-              <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'user/auth' ?>">
-                <button type="submit" class=" btn btn-sm btn-primary" name="addOrder"> Оформить заказ </button>
-              </a>
-              <? endif; ?>
-
             </form>
+            <? else : ?>
+            <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'user/auth' ?>">
+              <button type="submit" class=" btn btn-sm btn-primary" name="authCart"> Оформить заказ </button>
+            </a>
+            <? endif; ?>
           </div>
           
           <? endif; ?>
@@ -130,43 +130,43 @@
       <br>
 
       <div class="middle-description  bg-light">Популярные категории</div>
-      <div class="album py-2 py ">
-            
-        <div class="container">
-          
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      
-            <? foreach ($mainGroups as $mainGroup): ?>
-            <? if(file_exists(IMG_ROOT. $mainGroup['group_id']. '.jpeg')) : ?>
-              <? $src = IMG_GROUP . $mainGroup['group_id']. '.jpeg';  ?>  
-            <? else : ?>
-              <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
-            <? endif; ?> 
+        <div class="album py-2 py ">
               
-            <div class="col">
-              <div class="card shadow-sm ">
-                <div class="d-flex justify-content-center align-items-center">
-                <img class="product_img_link_cart" width="150" height="150" 
-                src=" <?= $src ?> " 
-                alt="<?= $mainGroup['group_name'] ?>">
-                </div>
-                <div class="card-body">
-                  <p class="card-text"><?= $mainGroup['group_name']; ?></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $mainGroup['group_translit'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
-                      </a>
+          <div class="container">
+            
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+              <? foreach ($mainGroups as $mainGroup): ?>
+              <? if(file_exists(IMG_ROOT. $mainGroup['group_id']. '.jpeg')) : ?>
+                <? $src = IMG_GROUP . $mainGroup['group_id']. '.jpeg';  ?>  
+              <? else : ?>
+                <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
+              <? endif; ?> 
+                
+              <div class="col">
+                <div class="card shadow-sm ">
+                  <div class="d-flex justify-content-center align-items-center">
+                  <img class="product_img_link_cart" width="150" height="150" 
+                  src=" <?= $src ?> " 
+                  alt="<?= $mainGroup['group_name'] ?>">
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text"><?= $mainGroup['group_name']; ?></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $mainGroup['group_translit'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <? endforeach; ?>
             </div>
-            <? endforeach; ?>
+            
           </div>
-          
+        
         </div>
-      
-      </div>
         
       </div>
 

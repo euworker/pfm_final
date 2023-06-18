@@ -30,6 +30,7 @@ class GroupController {
         $groups = $this->groupModel->getAllGroupsPaginated($limit, $offset);
         $title = 'Каталог';
         require_once("views/groups/table.html");
+        
 
     }
 

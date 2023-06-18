@@ -19,6 +19,7 @@ class CartController {
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
         $this->mainModel = new Main();
         $this->productModel = new Product();
+        $this->cartModel = new Cart();
         global $menuProducts;
         $this->menuProducts = $menuProducts;
         
@@ -91,12 +92,11 @@ class CartController {
 
     public function actionOrder() {
         $mainGroups = $this->mainModel->getMainGroups();
-            $title = 'Ваш заказ';
-            $h1 = 'Ваш заказ';
-        // addOrder    дописать
-        if(isset($_POST['addOrder']) && !empty($_COOKIE["cart"]) && $this->isAuthorized )  {
-            $cart = unserialize($_COOKIE["cart"]);
+        $title = 'Ваш заказ';
+        $h1 = 'Ваш заказ';
 
+        if(isset($_POST['orderSumm']) && isset($_POST['addOrder']) && !empty($_COOKIE["cart"]) && $this->isAuthorized )  {
+            $cart = unserialize($_COOKIE["cart"]);
             $order = $this->cartModel->insertOrder($_COOKIE['uid'], $cart);
             if ($order) {
                 setcookie("cart", "", time()+ 60 * 60 * 24 * 365, path:'/');
