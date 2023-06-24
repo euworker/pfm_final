@@ -94,7 +94,7 @@ class ProductsController {
         // if (!preg_match('/\d/i', $product_id )) {
         //     header('Location: '. FULL_SITE_ROOT . 'errors/404');
         // }
-
+        // $product = $this->productModel->getById($product_id);
         try{
             $product = $this->productModel->getById($product_id);
             } catch (Exception $e) {

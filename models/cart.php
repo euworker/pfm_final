@@ -28,7 +28,7 @@ public function insertOrder($userId, $cart_user){
 
 
             // $cart_product_price = 
-            $query = "INSERT INTO `carts` (`cart_product_id`, `cart_product_count` , `cart_order_id`, 
+            $query = "INSERT INTO `carts` (`cart_product_id`, `cart_product_count` , `cart_order_id` 
             -- `cart_product_price`
             ) 
             VALUES ('$key', '$item', '$order_id' )";

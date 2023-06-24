@@ -32,27 +32,10 @@ $routes = array (
     'SearchController' => array (
         'search' => 'index'
     ),
-
-    // 'ProductsController' => array (
-
-    //     // пагинация в группе
-    //     'product/([A-Za-z_]+)/([A-Za-z_]+)/page=([0-9]+)' => 'group/$1/$2/$3',
-    //     'product/([A-Za-z_]+)/page=([0-9]+)' => 'group/$1/$2',
-    //     // товар
-    //     'product/([A-Za-z_]+)/([A-Za-z_]+)/([A-Za-z0-9_]+)' => 'product/$1/$2/$3',
-    //     // группы
-    //     'product/([A-Za-z_]+)' => 'group/$1',
-    //     // старое
-    //     'product/add' => 'add',
-    //     'product/edit/([0-9+])' => 'edit/$1',
-    //     'product/delete/([0-9+])' => 'delete/$1',
-    //     'products/([0-9]+)' => 'index',
-    //     'products' => 'index'
-    // ),
     
      
     'ErrorController' => array (
-        'errors/404' => '404',   
+        'errors/404' => '404'   
     ),
 
     'ProductsController' => array (
@@ -86,12 +69,6 @@ $routes = array (
         'stocks/page=([0-9+])' => 'index/$1',
         'stocks' => 'index'
     ),
-
-    // 'CommonController' => array (
-    //     'how_to_buy' => 'indexhowtobuy',
-    //     'contacts' => 'indexcontacts',
-    //     'about' => 'indexabout'
-    // ),
 
     'HowToBuyController' => array (
         'how_to_buy' => 'indexhowtobuy'

@@ -13,15 +13,8 @@ require_once("components/autoload.php");
 
 $menu = new Menu();
 $menuProducts = $menu -> getOneLevelNameGroups();
-// print_r($menuProducts);
-// die;
-// $menuProducts = $menu -> links();
-$router = new Router();
-//  дописать  модель и сонтроллер ддля вывода данных в хедере
- 
-// // переменная существет только до хапуска роутера
 
-// print_r($menuProducts);
+$router = new Router();
 
 
 $router->run();
