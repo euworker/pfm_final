@@ -48,18 +48,15 @@ function  email_check($email){
     } else {
         return 1;
     }
-    //false есть соответствие. возможны только русские и цифры
 }
 
 function  password_check($password){
-    // латинские. Долго ковырялся, так и не смог прикрутить кириллицу даже через 'u' не понимает
     if ( preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{3,10}$/",$password)) {
 
         return 0;
     } else {
         return 1;
     }
-    //false есть соответствие.
 }
 
 

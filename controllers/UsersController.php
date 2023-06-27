@@ -7,7 +7,7 @@ class UsersController  {
     private $helper;
     private $isAuthorized;
 
-    private $productIdAddToCard;
+  
     public $menuProducts;
 
     public function __construct() {
@@ -16,9 +16,6 @@ class UsersController  {
         $this->isAuthorized = $this->userModel->checkIfUserAuthorized();
         global $menuProducts;
         $this->menuProducts = $menuProducts;
-        
-        // setcookie("products", '', time() + 2 * 24 * 3600, path:'/');
-        // $this->productIdAddToCard = setcookie("products", '', time() + 2 * 24 * 3600, path:'/');
     }
 
 
@@ -28,11 +25,9 @@ class UsersController  {
         
 
         $errors = [];
-        // пераписать под ООП functions
         include_once("functions.php");
 
         if (isset($_POST['user_email'])) {
-        // написать проверки что это емаеил - регулярками
             $email = clean($_POST['user_email']);
             $password = clean($_POST['user_password']);
             $passwordRepeat = clean($_POST['user_password_repeat']);
@@ -55,23 +50,23 @@ class UsersController  {
                 if (empty($errors)) {
                     // шифруем пароль
                     $hashedPassword = md5($password);
-                    print_r(' сделал md5');
+                    // print_r(' сделал md5');
                     $this->userModel->register($email,$hashedPassword);
-                    print_r(' сделал register');
+                    // print_r(' сделал register');
                     $userInfo = $this->userModel->getUserInfo($email,$hashedPassword);
-                    print_r(' сделал getUserInfo');
+                    // print_r(' сделал getUserInfo');
 
 
                     $token = generateToken();
-                    print_r(' сделал generateToken');
+                    // print_r(' сделал generateToken');
                     // нужно пересоздавать токен чаще
                     $tokenTime = time() + 30 * 60;
-                    print_r(' сделал time');
+                    // print_r(' сделал time');
                     $userId = $userInfo['user_id'];
-                    print_r(' сделал userId');
+                    // print_r(' сделал userId');
 
                     $this->userModel->auth($userId, $token, $tokenTime) ;
-                    print_r(' сделал auth');
+                    // print_r(' сделал auth');
                     
                     setcookie("uid", $userInfo['user_id'], time() + 2 * 24 * 3600, path:'/');
                     //кука для токена
@@ -141,10 +136,6 @@ if (isset($_POST['user_email'])) {
 
     }
 
-    if(!empty($errors)) {
-        print_r($errors);
-
-    }
 }
 
 

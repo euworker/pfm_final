@@ -42,9 +42,7 @@ class ProductsController {
             $index = 'page=';
             $offset = ($page - 1) * $limit;
             $pagination = new Pagination($total, $currentPage, $limit, $index);
-            // print('до' . $limit . ' ' . $offset);
             $products = $this->productModel->getProductsByNameTranslitGroup($group_name_translit, $limit, $offset);
-            // дописать 
 
             if (count($products)==0) {
                 $title = 'Товары';
@@ -54,23 +52,20 @@ class ProductsController {
                     $title = $products[0]['group_name'] . PRODUCT_TITLE;
                     $description = $products[0]['group_name']. PRODUCT_DESCRIPTION;
                 }
-            // print('после' . $limit . ' ' . $offset);
-            // print_r($products);
+
 
     
             require_once("views/products/table.html");
 
         } else {
             $total = $this->productModel->getTotalChildGroupsInParentGroup($group_name_translit);
-            print($total);
+            // print($total);
             $limit = 3;
             $currentPage = $page;
             $index = 'page=';
             $offset = ($page - 1) * $limit;
             $pagination = new Pagination($total, $currentPage, $limit, $index);
-            // print('до' . $limit . ' ' . $offset);
             $groups = $this->productModel->getGroupByNameTranslitGroup($group_name_translit, $limit, $offset);
-            // дописать 
 
             if (count($groups)==0) {
                 $title = 'Группа товаров';
@@ -81,7 +76,6 @@ class ProductsController {
                 $description = $groups[0]['parent_group_name']. PRODUCT_DESCRIPTION;
             }
 
-    
             require_once("views/products/table.html");
         }
     }
@@ -90,33 +84,31 @@ class ProductsController {
         
     public function actionProduct($group_name_translit,$product_id) {
         if(isset($group_name_translit) && isset($product_id) ) 
-        // проверяем что цифры, то true  
-        // if (!preg_match('/\d/i', $product_id )) {
-        //     header('Location: '. FULL_SITE_ROOT . 'errors/404');
-        // }
-        // $product = $this->productModel->getById($product_id);
         try{
             $product = $this->productModel->getById($product_id);
             } catch (Exception $e) {
                 header('Location: '. FULL_SITE_ROOT . 'errors/404');
             }
         
-        // setcookie("products", $product['product_id'], time() + 2 * 24 * 3600, path:'/');
         $h1 = $product['product_name'] . ' ' . $product['product_art'];
         $title = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_TITLE;
         $description = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_DESCRIPTION;
         $src = IMG_PRODUCT . $product['product_id']. '.jpeg';
         if (file_exists(IMG_ROOT. $product['product_id']. '.jpeg')) {
-            // clearstatcache();
             $src = IMG_PRODUCT . $product['product_id']. '.jpeg';    
         }else{
-   
             $src = PRODUCT_MANUFACTURER_GROUP_IMG;
         }
-         require_once("views/products/product_table.html");
-         
+         require_once("views/products/product_table.html"); 
 
     } 
+
+    public function actionGetProductByGroup($group_id) { 
+        $products = $this->productModel->getProductByGroup($group_id);
+        $title = 'Товары';
+        require_once("views/products/table.html");
+    }
+
 
 
 
@@ -129,9 +121,7 @@ class ProductsController {
             $product_price = clean($_POST['product_price']);
             $product_quantity = clean($_POST['product_quantity']);
             $product_img_link = clean($_POST['product_img_link']);
-            // $product_warehouse_id = clean($_POST['product_warehouse_name']);
             $product_manufacturer_id = clean($_POST['product_manufacturer_name']);
-            // $product_group_id = clean($_POST['product_group_name']);
 
             if (
                 empty($product_art) 
@@ -144,11 +134,9 @@ class ProductsController {
                 || empty($product_price) 
                 || ($product_price < 0 ||  $product_price > 99999999)  
                 || !is_numeric($product_price) 
-                // || empty($product_warehouse_id)
-                // || empty($product_group_id)
             )  
              {
-                echo 'Не соблюдены условия!'; 
+                print 'Не соблюдены условия!'; 
                 
             } else {
                 $data = array (
@@ -184,9 +172,7 @@ class ProductsController {
             $product_price = clean($_POST['product_price']);
             $product_quantity = clean($_POST['product_quantity']);
             $product_img_link = clean($_POST['product_img_link']);
-            // $product_warehouse_id = clean($_POST['product_warehouse_name']);
             $product_manufacturer_id = clean($_POST['product_manufacturer_name']);
-            // $product_group_id = clean($_POST['product_group_name']);
 
             if (
                 empty($product_art) 
@@ -199,11 +185,9 @@ class ProductsController {
                 || empty($product_price) 
                 || ($product_price < 0 ||  $product_price > 99999999)  
                 || !is_numeric($product_price) 
-                // || empty($product_warehouse_id)
-                // || empty($product_group_id)
             )  
              {
-                echo 'Не соблюдены условия!'; 
+                print 'Не соблюдены условия!'; 
                 
             } else {
 
@@ -219,7 +203,6 @@ class ProductsController {
                 );
                 // забираем массив объект из базы. превращаем в масиив. сравниваем 2 массива. 
                 // расхождение превращаем из масиива в строки  или инты для записи в базу, обновляем только новые стркои 
-                //  if ( $this->productModel->dataDif($data,$product) == 1 ); 
                 $this->productModel->edit($data,$id);
                 header('Location: '. FULL_SITE_ROOT . 'products');
                 
@@ -243,11 +226,7 @@ class ProductsController {
     }
 
 
-    public function actionGetProductByGroup($group_id) { 
-        $products = $this->productModel->getProductByGroup($group_id);
-        $title = 'Товары';
-        require_once("views/products/table.html");
-    }
+
 
 }
 

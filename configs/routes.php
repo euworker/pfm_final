@@ -2,18 +2,6 @@
 
 $routes = array (
 
-    // platform-it.ru   - '' - каркас гтов
-    // каталог platform-it.ru/products/ - ожидается переработка
-    // группа товаров platform-it.ru/products/voip/ - не сделан
-    // товар platform-it.ru/products/voip/sip-t21-e2 - не сделан
-    // корзина platform-it.ru/cart - не сделан
-    // заказ оформлен platform-it.ru/cart/success_page - не сделан
-    // акции   platform-it.ru/stock - каркас гтов
-    // как купить platform-it.ru/how_to_buy - каркас гтов
-    // бренды platform-it.ru/manufacturers -каркас готов
-    // контакты platform-it.ru/contacts   - каркас гтов
-
-
     'ManufacturerController' => array (
         'manufacturer/add' => 'add',
         'manufacturer/edit/([0-9+])' => 'edit/$1',

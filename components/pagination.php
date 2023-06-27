@@ -153,7 +153,7 @@ class Pagination
             # Начало - минус $this->max от конца
             $start = $this->amount - $this->max > 0 ? $this->amount - $this->max : 1;
         }
-		// print_r($this->max);
+		//  print_r($this->max);
 # Возвращаем
         return
             array($start, $end);
