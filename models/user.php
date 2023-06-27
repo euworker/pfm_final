@@ -30,7 +30,8 @@ public function register($email,$hashedPassword) {
              $query = "
             INSERT INTO `users`
             SET `user_email` = '$email',
-                `user_password` = '$hashedPassword';
+                `user_password` = '$hashedPassword',
+                `user_is_admin` = 0;
             ";
             return mysqli_query($this->connect, $query);
 }
@@ -47,6 +48,24 @@ public function getUserInfo($email,$hashedPassword) {
         $result = mysqli_query($this->connect, $query);
         return mysqli_fetch_assoc($result);
    
+}
+
+public function checkIfUserIsAdmin($email) {
+
+    $query = "
+    SELECT `user_is_admin`
+    FROM `users`
+    WHERE `user_email` = '$email';
+    ";
+    $result = mysqli_query($this->connect, $query);
+    $res = mysqli_fetch_assoc($result);
+    if (array_shift($res) == 1 ) {
+        return 1;
+ 
+    } else {
+        return 0;
+    }
+      
 }
 
 

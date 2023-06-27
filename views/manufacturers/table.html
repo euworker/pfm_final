@@ -19,7 +19,14 @@
 <div class="album py-2 py ">
       
   <div class="container">
- 
+    <? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?> 
+    
+      <a type="submit" class="btn btn-primary" href="<?= FULL_SITE_ROOT . 'manufacturer/add'; ?>">
+        Добавить
+      </a>
+      <br>
+      <br>
+    <? endif; ?> 
     <div class="col ">
       <? foreach ($manufacturers as $manufacturer): ?>
       <div class="d-flex justify-content-between align-items-center">
@@ -28,7 +35,14 @@
           <div class="card-body ">
             <h4 class="card-text "><?= $manufacturer['manufacturer_name']; ?> </h4>
             <p class="card-text"><?= $manufacturer['manufacturer_description']; ?> </p>
-            
+            <? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?>
+                <a type="submit" class="btn btn-success" href="<?= FULL_SITE_ROOT . 'manufacturer/edit/' . $manufacturer['manufacturer_id'] ; ?>">
+                  Изменить
+                </a>
+               <button type="submit" class="btn btn-danger" onclick="remove('manufacturer', <?= $manufacturer['manufacturer_id']; ?> )">
+                    Удалить
+               </button>
+            <? endif; ?>
           </div>
         </div>
       </div>

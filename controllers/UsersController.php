@@ -6,7 +6,8 @@ class UsersController  {
     private $userModel;
     private $helper;
     private $isAuthorized;
-
+    
+    public $userIsAdmin;
   
     public $menuProducts;
 
@@ -16,6 +17,7 @@ class UsersController  {
         $this->isAuthorized = $this->userModel->checkIfUserAuthorized();
         global $menuProducts;
         $this->menuProducts = $menuProducts;
+   
     }
 
 
@@ -121,6 +123,7 @@ if (isset($_POST['user_email'])) {
             // нужно пересоздавать токен чаще
             $tokenTime = time() + 30 * 60;
             $userId = $userInfo['user_id'];
+            
             $this->userModel->auth($userId, $token, $tokenTime);
 
             // назвение куки, value, время жизни 2 дня, доступен на всем сайте
@@ -129,6 +132,10 @@ if (isset($_POST['user_email'])) {
             setcookie("t", $token, time() + 2 * 24 * 3600, path:'/');
             // кука токентайма
             setcookie("tt", $tokenTime, time() + 2 * 24 * 3600, path:'/');
+            if ($this->userModel->checkIfUserIsAdmin($email) == 1) {
+                setcookie("ad", "1", time() + 2 * 24 * 3600, path:'/');
+            }
+
 
             header("Location: " . FULL_SITE_ROOT . 'cart');
 
@@ -155,6 +162,11 @@ if (isset($_POST['user_email'])) {
         setcookie("t", "", time() - 2 * 24 * 3600, path:'/');
         // кука токентайма
         setcookie("tt", 0, time() - 2 * 24 * 3600, path:'/');
+        if (isset($_COOKIE["ad"])) {
+            setcookie("ad", "", time() + 2 * 24 * 3600, path:'/');
+        }
+        
+        
 
         header("Location: " . FULL_SITE_ROOT );
     }

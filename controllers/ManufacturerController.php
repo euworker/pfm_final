@@ -9,10 +9,13 @@ class ManufacturerController {
 
     public $menuProducts;
 
+    public $userIsAdmin;
+
     public function __construct() {
         $this->manufacturerModel = new Manufacturer();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
+        global $userIsAdmin;  
         $this->groupModel = new Group();
         global $menuProducts;
         $this->menuProducts = $menuProducts;
@@ -37,7 +40,9 @@ class ManufacturerController {
 
     }
 
+
     public function actionAdd(){
+
         $errors = [];
         if (isset($_POST['manufacturerName'])) {
         $manufacturerName = htmlentities($_POST['manufacturerName']);
@@ -62,15 +67,12 @@ class ManufacturerController {
         if (isset($_POST['manufacturerName'])) {
         $manufacturerName = htmlentities($_POST['manufacturerName']);
         $manufacturerDesc = htmlentities($_POST['manufacturerDesc']);
-        // todo проверки !!! регулярки -> если проверка на регулярку не проходит, то записаваем ошибку в
-        // errors/ офибку придумаваем сами
-        // рекущее значение фио, не совпадает с существующим  
+
         if (empty($errors)) { 
             if ($manufacturer['manufacturer_name'] === $manufacturerName) {
                 header('Location: ' . FULL_SITE_ROOT . 'manufacturers');
             }
             if ($manufacturer['manufacturer_name'] !== $manufacturerName) {
-                 // TODO проверка - значение есть в таблице !
                  $result = $this->manufacturerModel->edit($manufacturerName,$manufacturerDesc, $id);
                 if ($result) {
                     header('Location: ' . FULL_SITE_ROOT . 'manufacturers');

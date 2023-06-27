@@ -2,11 +2,14 @@
 
 
 <? include_once("views/common/header.html"); ?> 
-    <? if($this->isAuthorized) : ?>
+<? if ($this->isAuthorized) :  ?>
+<? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?> 
+<div class="container">
+    
     <a type="submit" class="btn btn-primary" href="<?= FULL_SITE_ROOT . 'manufacturer/add'; ?>">
     Добавить
     </a>
-    <? endif; ?>
+    
     <table>
         <thead>
             <tr>
@@ -34,6 +37,9 @@
                 <? endforeach; ?>
         </tbody>
     </table>
-    <?= $pagination->get(); ?>
 
+</div>
+    <?= $pagination->get(); ?>
+    <? endif; ?> 
+    <? endif; ?> 
 <? include_once("views/common/footer.html"); ?>
