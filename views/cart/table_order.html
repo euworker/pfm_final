@@ -7,9 +7,8 @@
     <nav aria-label="breadcrumb ">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
-          <!-- <li class="breadcrumb-item active"><a href="<?= FULL_SITE_ROOT . 'product/'  . $product['group_translit'] ?>"><?= $product['group_name'] ?></a></li>           -->
           <? if(isset($h1)) : ?>
-          <li class="breadcrumb-item active"><?= $h1 ?></li>
+            <li class="breadcrumb-item active"><?= $h1 ?></li>
           <? endif; ?>
         </ol>
       </nav>
@@ -27,8 +26,8 @@
             <br>
           </div>
       <? else: ?>
-      <div class="container">
-        <p> Что-то не так! Позвоните по телефону <a class="address__item" href="tel:+78124567007"><i class="fas fa-phone-alt"></i>&nbsp;+7&nbsp;(812)&nbsp;456-70-07</a> или напишите на почту <a class="address__item"
+        <div class="container">
+          <p> Что-то не так! Позвоните по телефону <a class="address__item" href="tel:+78124567007"><i class="fas fa-phone-alt"></i>&nbsp;+7&nbsp;(812)&nbsp;456-70-07</a> или напишите на почту <a class="address__item"
           href="mailto:platform-it@yandex.ru"><i class="fas fa-envelope"></i>&nbsp;platform-it@yandex.ru</a> . </p>
           <br>
           <br>
@@ -52,8 +51,8 @@
                 <div class="card shadow-sm ">
                   <div class="d-flex justify-content-center align-items-center">
                   <img class="product_img_link_cart" width="150" height="150" 
-                  src=" <?= $src ?> " 
-                  alt="<?= $mainGroup['group_name'] ?>">
+                    src=" <?= $src ?> " 
+                    alt="<?= $mainGroup['group_name'] ?>">
                   </div>
                   <div class="card-body">
                     <p class="card-text"><?= $mainGroup['group_name']; ?></p>

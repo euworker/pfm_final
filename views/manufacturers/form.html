@@ -14,16 +14,10 @@
       <label for="floatingTextarea_add">Описание вендора</label> <br>    
     <textarea class="form-control" id="floatingTextarea_add" name="manufacturerDesc"><?= isset ($manufacturer) ? $manufacturer['manufacturer_description'] : ''; ?> </textarea>
     </div>
+    <? if (!empty($errors)) : ?>
+      <p class="border border-warning rounded"><? print($errors[0]) ?></p>
+    <? endif; ?>
 
-    <div>
-      <label class="form-label" for="product_manufacturer_name">Производитель</label> <br>
-      <select name="product_manufacturer_name">
-          <? foreach ($manufacturers as $manufacturer): ?>
-          <option <?= (isset($product) &&  in_array($manufacturer['manufacturer_id'], $product['manufacturers_getById'] )) ? 'selected': '' ?>
-          value=" <?= $manufacturer['manufacturer_id']?>"><?= $manufacturer['manufacturer_name']?></option>
-          <? endforeach; ?>
-      </select>
-    </div>  
 
     <button type="submit" class="btn btn-primary">
       <?= isset($manufacturer) ? 'Изменить' : 'Добавить'; ?> 

@@ -1,7 +1,6 @@
 <?php
 
-//  require_once("models/manufacturer.php");
-
+require_once("functions.php");
 class ManufacturerController {
     private $groupModel;
     private $manufacturerModel;
@@ -9,13 +8,13 @@ class ManufacturerController {
 
     public $menuProducts;
 
-    public $userIsAdmin;
+    // public $userIsAdmin;
 
     public function __construct() {
         $this->manufacturerModel = new Manufacturer();
         $userModel = new User();
         $this->isAuthorized = $userModel->checkIfUserAuthorized();
-        global $userIsAdmin;  
+        // global $userIsAdmin;  
         $this->groupModel = new Group();
         global $menuProducts;
         $this->menuProducts = $menuProducts;
@@ -47,13 +46,19 @@ class ManufacturerController {
         if (isset($_POST['manufacturerName'])) {
         $manufacturerName = htmlentities($_POST['manufacturerName']);
         $manufacturerDesc = htmlentities($_POST['manufacturerDesc']);
-        // todo проверки !!! регулярки -> если проверка на регулярку не проходит, то записаваем ошибку в
-        // errors/ офибку придумаваем сами
-        // проверка - значение есть в таблице ! 
+        if (empty($manufacturerName) 
+            || empty($manufacturerDesc) 
+            || check_length($manufacturerDesc,1,980) 
+            || check_length($manufacturerName,1,99)) {
+            $errors[] = 'Поля не могут быть пусты или слишком длинные';
+        }     
+        
+
         if (empty($errors)) {
             $this->manufacturerModel->insert($manufacturerName,$manufacturerDesc);
             header('Location: ' . FULL_SITE_ROOT . 'manufacturers');
         }
+
     }
         require_once("views/manufacturers/form.html");
     } 
@@ -62,11 +67,20 @@ class ManufacturerController {
 
     public function actionEdit($id){
         $errors = [];
+
         $manufacturer = $this->manufacturerModel->GetById($id);
 
         if (isset($_POST['manufacturerName'])) {
         $manufacturerName = htmlentities($_POST['manufacturerName']);
         $manufacturerDesc = htmlentities($_POST['manufacturerDesc']);
+            
+
+        if (empty($manufacturerName) 
+            || empty($manufacturerDesc) 
+            || check_length($manufacturerDesc,1,980) 
+            || check_length($manufacturerName,1,99)) {
+            $errors[] = 'Поля не могут быть пусты или слишком длинные';
+        } 
 
         if (empty($errors)) { 
             if ($manufacturer['manufacturer_name'] === $manufacturerName) {
@@ -93,9 +107,10 @@ class ManufacturerController {
 
     public function actionDelete($id) {
         $errors = [];
-        // TODO проверка на то, что id передан правильно.
-        // id соответствует регулярке 
-        // id есть в базе
+        if ( !is_numeric($id) ) {
+            $errors[] = "Не число";
+        }
+
         $this->manufacturerModel->remove($id);
         header('Location: ' . FULL_SITE_ROOT . 'manufacturers');
     }

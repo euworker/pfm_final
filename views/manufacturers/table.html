@@ -27,6 +27,9 @@
       <br>
       <br>
     <? endif; ?> 
+    <? if (!empty($errors)) : ?>
+      <p class="border border-warning rounded"><? print($errors[0]) ?></p>
+    <? endif; ?>
     <div class="col ">
       <? foreach ($manufacturers as $manufacturer): ?>
       <div class="d-flex justify-content-between align-items-center">

@@ -19,7 +19,6 @@ class GroupController {
     }
 
     public function actionIndex($page = 1) { 
-        $menuProducts = $this-> groupModel->getOneLevelNameGroups();
         $total = $this->groupModel->getGroupsCount();
         $limit = 6;
         $currentPage = $page;
@@ -32,17 +31,6 @@ class GroupController {
         
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

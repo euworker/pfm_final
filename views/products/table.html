@@ -1,15 +1,5 @@
 <? include_once("views/common/header.html"); ?> 
 
-    <!-- <? if($this->isAuthorized) : ?>
-    <a type="submit" class="btn btn-primary " href="<?= FULL_SITE_ROOT . 'product/add'; ?>">
-    Добавить
-    </a>
-    <? endif; ?> -->
-
-   
-
-
-
 <div class="container">
 
   <nav aria-label="breadcrumb ">
@@ -29,94 +19,89 @@
 
 
             
-        <div class="album py-2 py ">
-              
-          <div class="container">
-            <? if(isset($empty)) : ?>
-            <div class="container">
-              <div><?= $empty ?></div>
-              <br>
-              <br>
-            </div>
-            <? endif; ?>
-
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-              <? if(isset($products)) : ?>
-              <? foreach ($products as $product): ?>
-              <? if(file_exists(IMG_ROOT. $product['product_id']. '.jpeg')) : ?>
-                <? $src = IMG_PRODUCT . $product['product_id']. '.jpeg';  ?>  
-              <? else : ?>
-                <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
-              <? endif; ?> 
-
-              <div class="col">
-                <div class="card shadow-sm">
-                  <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-                  <div class="d-flex justify-content-center align-items-center">
-                    <img class="product_img_link" width="150" height="150" 
-                      src=" <?= $src ?> " 
-                      alt="<?= $product['product_name'] . ' ' . $product['product_art'] ?>">
-                  </div>
-                  <div class="card-body">
-                    <p class="card-text"><?= $product['product_name']; ?> <?= $product['product_art']; ?> </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/'  . $product['group_translit'] . '/' . $product['product_id']; ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
-                          </a>
-                        <!--  -->
+  <div class="album py-2 py ">
         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div class="container">
+      <? if(isset($empty)) : ?>
+      <div class="container">
+        <div><?= $empty ?></div>
+        <br>
+        <br>
+      </div>
+      <? endif; ?>
 
-              <? endforeach; ?>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-              <? else : ?>
+        <? if(isset($products)) : ?>
+        <? foreach ($products as $product): ?>
+        <? if(file_exists(IMG_ROOT. $product['product_id']. '.jpeg')) : ?>
+          <? $src = IMG_PRODUCT . $product['product_id']. '.jpeg';  ?>  
+        <? else : ?>
+          <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
+        <? endif; ?> 
 
-              <? foreach ($groups as $group): ?>
-                <? if(file_exists(IMG_ROOT. $group['group_id']. '.jpeg')) : ?>
-                  <? $src = IMG_GROUP . $group['group_id']. '.jpeg';  ?>  
-                <? else : ?>
-                  <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
-                <? endif; ?> 
-              <div class="col">
-                <div class="card shadow-sm">
-                  <div class=" my-2 d-flex justify-content-center align-items-center">
-                    <img class="product_img_link" width="150" height="150" 
-                      src=" <?= $src ?> " 
-                      alt="<?= $group['group_name'] ?>">
-                  </div>
-                  <div class="card-body">
-                    <p class="card-text"><?= $group['group_name']; ?> </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $group['group_translit']; ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
-                          </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <? endforeach; ?>
-
-              <? endif; ?>
-
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="d-flex justify-content-center align-items-center">
+              <img class="product_img_link" width="150" height="150" 
+                src=" <?= $src ?> " 
+                alt="<?= $product['product_name'] . ' ' . $product['product_art'] ?>">
             </div>
-            <? if(!isset($empty)) : ?>
-
-              <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
-            <? endif; ?>
-
-            
+            <div class="card-body">
+              <p class="card-text"><?= $product['product_name']; ?> <?= $product['product_art']; ?> </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/'  . $product['group_translit'] . '/' . $product['product_id']; ?>">
+                    <button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
 
+        <? endforeach; ?>
 
-          
+        <? else : ?>
+
+        <? foreach ($groups as $group): ?>
+          <? if(file_exists(IMG_ROOT. $group['group_id']. '.jpeg')) : ?>
+            <? $src = IMG_GROUP . $group['group_id']. '.jpeg';  ?>  
+          <? else : ?>
+            <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
+          <? endif; ?> 
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class=" my-2 d-flex justify-content-center align-items-center">
+              <img class="product_img_link" width="150" height="150" 
+                src=" <?= $src ?> " 
+                alt="<?= $group['group_name'] ?>">
+            </div>
+            <div class="card-body">
+              <p class="card-text"><?= $group['group_name']; ?> </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $group['group_translit']; ?>">
+                    <button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <? endforeach; ?>
+
+        <? endif; ?>
+
+      </div>
+      <? if(!isset($empty)) : ?>
+        <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
+      <? endif; ?>
+
+      
+    </div>        
  
-</div>      
+  </div>      
       
 </div>
 

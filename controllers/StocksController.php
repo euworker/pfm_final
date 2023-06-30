@@ -27,8 +27,6 @@ class StocksController {
         $offset = ($page - 1) * $limit;    
         $pagination = new Pagination($total, $currentPage, $limit, $index);
         $stocks = $this->stockModel->getAllStocksPaginated($limit, $offset);
-        
-        // print_r($this->stockModel->getNameGroupByProductId($stocks['stock_product_id']));
         $title = 'Акции';
         require_once("views/stocks/table.html");
 
