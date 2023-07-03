@@ -35,9 +35,9 @@ $routes = array (
         // группы
         'product/([A-Za-z_]+)' => 'group/$1',
         // старое
-        'product/add' => 'add',
-        'product/edit/([0-9+])' => 'edit/$1',
-        'product/delete/([0-9+])' => 'delete/$1',
+        // 'product/add' => 'add',
+        // 'product/edit/([0-9+])' => 'edit/$1',
+        // 'product/delete/([0-9+])' => 'delete/$1',
         'products/([0-9]+)' => 'index',
         'products' => 'index'
     ),
