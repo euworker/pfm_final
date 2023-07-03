@@ -63,6 +63,7 @@ class ProductsController {
     }
   
     public function actionProduct($group_name_translit,$product_id) {
+
         if(isset($group_name_translit) && isset($product_id) ) 
         try{
             $product = $this->productModel->getById($product_id);
@@ -73,6 +74,7 @@ class ProductsController {
         $h1 = $product['product_name'] . ' ' . $product['product_art'];
         $title = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_TITLE;
         $description = $product['product_name'] . ' ' . $product['product_art']. PRODUCT_DESCRIPTION;
+        
         if (file_exists(IMG_ROOT. $product['product_id']. '.jpeg')) {
                 $src = IMG_PRODUCT . $product['product_id']. '.jpeg';    
             }else{
@@ -86,19 +88,6 @@ class ProductsController {
         $title = 'Товары';
         require_once("views/products/table.html");
     }  
-
-    // public function actionIndex($page = 1) { 
-    //     $total = $this->productModel->getTotal();
-    
-    //     $limit = 3;
-    //     $currentPage = $page;
-    //     $index = 'page=';
-    //     $offset = ($page - 1) * $limit;
-    //     $pagination = new Pagination($total, $currentPage, $limit, $index);
-    //     $products = $this->productModel->getAllPaginated($limit, $offset);
-    //     $title = 'Товары';
-    //     require_once("views/products/table.html");
-    // }
 
 }
 

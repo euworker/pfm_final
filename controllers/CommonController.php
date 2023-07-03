@@ -17,8 +17,7 @@ class CommonController {
         $this->groupModel = new Group();
         global $menuProducts;
         $this->menuProducts = $menuProducts;
-        
-        
+            
     }
 
 

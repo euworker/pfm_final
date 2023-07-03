@@ -15,11 +15,10 @@ class User {
 
     public function checkIfUserExists($email) {
 
-        $query = "
-        SELECT COUNT(*) as `count`
-        FROM `users`
-        WHERE `user_email` = '$email';
-        ";
+        $query = "SELECT COUNT(*) as `count`
+                    FROM `users`
+                    WHERE `user_email` = '$email';
+                    ";
         $result = mysqli_query($this->connect, $query);
         return mysqli_fetch_assoc($result)['count']; 
 
@@ -27,12 +26,11 @@ class User {
 
 public function register($email,$hashedPassword) {
 
-             $query = "
-            INSERT INTO `users`
-            SET `user_email` = '$email',
-                `user_password` = '$hashedPassword',
-                `user_is_admin` = 0;
-            ";
+             $query = "INSERT INTO `users`
+                        SET `user_email` = '$email',
+                            `user_password` = '$hashedPassword',
+                            `user_is_admin` = 0;
+                        ";
             return mysqli_query($this->connect, $query);
 }
 
@@ -40,11 +38,10 @@ public function register($email,$hashedPassword) {
 
 public function getUserInfo($email,$hashedPassword) {
 
-        $query = "
-        SELECT COUNT(*) as `count`, `user_id`
-        FROM `users`
-        WHERE `user_email` = '$email' AND `user_password`= '$hashedPassword';
-        ";
+        $query = "SELECT COUNT(*) as `count`, `user_id`
+                    FROM `users`
+                    WHERE `user_email` = '$email' AND `user_password`= '$hashedPassword'
+                    ";
         $result = mysqli_query($this->connect, $query);
         return mysqli_fetch_assoc($result);
    
@@ -52,16 +49,15 @@ public function getUserInfo($email,$hashedPassword) {
 
 public function checkIfUserIsAdmin($email) {
 
-    $query = "
-    SELECT `user_is_admin`
-    FROM `users`
-    WHERE `user_email` = '$email';
-    ";
+    $query = "SELECT `user_is_admin`
+                FROM `users`
+                WHERE `user_email` = '$email'
+                ";
     $result = mysqli_query($this->connect, $query);
     $res = mysqli_fetch_assoc($result);
+
     if (array_shift($res) == 1 ) {
         return 1;
- 
     } else {
         return 0;
     }
@@ -70,35 +66,33 @@ public function checkIfUserIsAdmin($email) {
 
 
 public function auth($userId, $token, $tokenTime) {
-                $query = "
-            INSERT INTO `connects`
-            SET 
-            `connect_user_id` = $userId,
-            `connect_token` = '$token',
-            `connect_token_time` = FROM_UNIXTIME($tokenTime);
-            ";
+                $query = "INSERT INTO `connects`
+                            SET 
+                            `connect_user_id` = $userId,
+                            `connect_token` = '$token',
+                            `connect_token_time` = FROM_UNIXTIME($tokenTime);
+                            ";
            return mysqli_query($this->connect,$query);
 }
 
 public function checkIfUserAuthorized() {
+
     if (!isset($_COOKIE['uid']) || !isset($_COOKIE['t']) || !isset($_COOKIE['tt'])) {
         return false;
     }
     $userId = htmlentities($_COOKIE['uid']);
     $token = htmlentities($_COOKIE['t']);
     $tokenTime = htmlentities($_COOKIE['tt']);
-    $query = "
-    SELECT `connect_id`
-    FROM `connects`
-    WHERE `connect_user_id` = $userId
-    AND `connect_token` = '$token'
-    LIMIT 1
-    ;
-    ";
+    $query = "SELECT `connect_id`
+                FROM `connects`
+                WHERE `connect_user_id` = $userId
+                AND `connect_token` = '$token'
+                LIMIT 1
+                ";
     $result = mysqli_query($this->connect,$query);
+
     if (mysqli_num_rows($result) === 0) {
-        return false;
-        
+        return false;    
     }
     if ($tokenTime < time()) {
         $newToken = $this->helper->generateToken();
@@ -108,17 +102,14 @@ public function checkIfUserAuthorized() {
                 setcookie("tt", $newTokenTime, time() + 2 * 24 * 3600, path:'/'); 
         $result = mysqli_fetch_assoc($result) ;
         $connectId = $result['connect_id'];
-                $query = "
-                UPDATE `connects`
-                SET `token` = '$newToken',
-                    `token_time` = FROM_UNIXTIME($tokenTime)
-                WHERE `connect_id` = $connectId;
-                ;"; 
+                $query = "UPDATE `connects`
+                            SET `connect_token` = '$newToken',
+                                `connect_token_time` = FROM_UNIXTIME($tokenTime)
+                            WHERE `connect_id` = $connectId
+                            "; 
                 mysqli_query($this->connect,$query); 
     }
     return true;
-
-
 }
 
 public function logout() {
@@ -128,11 +119,9 @@ public function logout() {
         $query = "DELETE FROM `connects`
                     WHERE `connect_user_id` = $userId
                     AND `connect_token` = '$token'
-                    ;";
+                    ";
                     return mysqli_query($this->connect,$query); 
     }
-
-
 }
 
 }

@@ -12,16 +12,6 @@ class HowToBuy {
         $this->connect = DB::getConnection();
 
     }
-
-
-    public function getHowToBuy() {
-
-    }
-
-
     
-
-
-
     
 }

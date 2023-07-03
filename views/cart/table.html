@@ -4,103 +4,103 @@
 
 <div class="container">
 
-    <nav aria-label="breadcrumb ">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
-          <!-- <li class="breadcrumb-item active"><a href="<?= FULL_SITE_ROOT . 'product/'  . $product['group_translit'] ?>"><?= $product['group_name'] ?></a></li>           -->
-          <? if(isset($h1)) : ?>
-          <li class="breadcrumb-item active"><?= $h1 ?></li>
-          <? endif; ?>
-        </ol>
-      </nav>
-           
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
+      <!-- <li class="breadcrumb-item active"><a href="<?= FULL_SITE_ROOT . 'product/'  . $product['group_translit'] ?>"><?= $product['group_name'] ?></a></li>           -->
       <? if(isset($h1)) : ?>
-        <div class="container">
-            <h1><?= $h1 ?></h1>
-        </div>
+        <li class="breadcrumb-item active"><?= $h1 ?></li>
       <? endif; ?>
+    </ol>
+  </nav>
+           
+  <? if(isset($h1)) : ?>
+    <div class="container">
+        <h1><?= $h1 ?></h1>
+    </div>
+  <? endif; ?>
 
       
       
-      <? if (!empty($cart)) : ?>
-      
-      <div class="album py-2 py ">
+  <? if (!empty($cart)) : ?>
+  
+    <div class="album py-2 py ">
 
 
-        <div class="container">
-          <? $summ = 0; ?>
-          <? if (!empty($products)): ?>
+      <div class="container">
+        <? $summ = 0; ?>
+        <? if (!empty($products)): ?>
           <? foreach($products as $item): ?>
-          <? $product = $item['product']; ?>
-          <? $summ += $item['count'] * $product['product_price']; ?>
-          <div >
-            
-            <div class="card-image row g-0 d-flex justify-content-around">
-              <div class=" col-md-5 m-1 flex-grow-1 d-flex justify-content-center align-items-center border rounded bg-white shadow-sm"> 
-                <!-- flex-grow-1 -->
-                  <!-- d-flex flex-wrap justify-content-between align-items-start col-sm -->
+            <? $product = $item['product']; ?>
+            <? $summ += $item['count'] * $product['product_price']; ?>
+            <div >
+              
+              <div class="card-image row g-0 d-flex justify-content-around">
+                <div class=" col-md-5 m-1 flex-grow-1 d-flex justify-content-center align-items-center border rounded bg-white shadow-sm"> 
+                  <!-- flex-grow-1 -->
+                    <!-- d-flex flex-wrap justify-content-between align-items-start col-sm -->
 
-                <img class="product_img_link " 
-                 src=" <?= $item['image']; ?> " 
-                 alt="<?= $product['product_name']; ?> <?= $product['product_art']; ?>">
-              </div>
+                  <img class="product_img_link " 
+                  src=" <?= $item['image']; ?> " 
+                  alt="<?= $product['product_name']; ?> <?= $product['product_art']; ?>">
+                </div>
 
-              <div class="card col-md-5 m-1 flex-grow-1 shadow-sm ">
-                <div class="card-body  ">
-                  <div class="card-text product-name">
-                    <p class="product-name__name"> <small>Наименование</small></p>
-                    <h6 class="card-title"><?= $product['product_name']; ?> <?= $product['product_art']; ?></h6>
-                    
-                  </div>
-                  <div class="card-text product-art">
-                    <p class="product-art__name"> <small>Артикул</small> </p>
-                    <p class="product-art__title"><?= $product['product_art']; ?></p>
-                    
-                  </div>
-                  <div class="card-text product-manufacturer">
-                    <p class="product-manufacturer__name"> <small>Производитель</small> </p>
-                    <p class="product-manufacturer__title"><?= $product['manufacturer_name']; ?></p>
-                    
-                  </div>
-                  <div class="card-text product-price">
-                    <h5 class="product-price__title"><?= $product['product_price']; ?>&nbsp;&#8381;</h5>                          
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
+                <div class="card col-md-5 m-1 flex-grow-1 shadow-sm ">
+                  <div class="card-body  ">
+                    <div class="card-text product-name">
+                      <p class="product-name__name"> <small>Наименование</small></p>
+                      <h6 class="card-title"><?= $product['product_name']; ?> <?= $product['product_art']; ?></h6>
                       
+                    </div>
+                    <div class="card-text product-art">
+                      <p class="product-art__name"> <small>Артикул</small> </p>
+                      <p class="product-art__title"><?= $product['product_art']; ?></p>
                       
-                      <form method="POST" action="<?= FULL_SITE_ROOT . 'cart' ?>">
-                        <input type="hidden" name="productId" value="<?= $product['product_id']; ?>" >
-                        <div class="d-flex justify-content-between align-items-center">
-                          <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
-                            <button type="submit" class="btn btn-sm btn-outline-primary switch_btn" name="removeFromCart"> < </button>
-                          </a>
-                          <div class="product-cart_quantity">
-                            <p class="product_q"><?= $item['count']; ?></p>
-                          </div>
-                          <? if($item['count'] < $product['product_quantity']) : ?>
+                    </div>
+                    <div class="card-text product-manufacturer">
+                      <p class="product-manufacturer__name"> <small>Производитель</small> </p>
+                      <p class="product-manufacturer__title"><?= $product['manufacturer_name']; ?></p>
+                      
+                    </div>
+                    <div class="card-text product-price">
+                      <h5 class="product-price__title"><?= $product['product_price']; ?>&nbsp;&#8381;</h5>                          
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        
+                        
+                        <form method="POST" action="<?= FULL_SITE_ROOT . 'cart' ?>">
+                          <input type="hidden" name="productId" value="<?= $product['product_id']; ?>" >
+                          <div class="d-flex justify-content-between align-items-center">
                             <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
-                              <button type="submit" class="btn btn-sm btn-outline-primary switch_btn " name="addToCart"> > </button>
+                              <button type="submit" class="btn btn-sm btn-outline-primary switch_btn" name="removeFromCart"> < </button>
                             </a>
-                          <? endif; ?>
-                        </div>
-                      </form>
+                            <div class="product-cart_quantity">
+                              <p class="product_q"><?= $item['count']; ?></p>
+                            </div>
+                            <? if($item['count'] < $product['product_quantity']) : ?>
+                              <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'cart' ?>">
+                                <button type="submit" class="btn btn-sm btn-outline-primary switch_btn " name="addToCart"> > </button>
+                              </a>
+                            <? endif; ?>
+                          </div>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              
+                
 
+              </div>
             </div>
-          </div>
-          <div class="border-bottom">
-          </div> 
+            <div class="border-bottom">
+            </div> 
           <? endforeach; ?> 
-          <? endif; ?>
-          <? if ($summ > 0) : ?>
-          <div class="my-1 px-5 d-flex justify-content-around align-items-center border rounded shadow-sm">
-            <? if($this->isAuthorized) : ?>
+        <? endif; ?>
+        <? if ($summ > 0) : ?>
+        <div class="my-1 px-5 d-flex justify-content-around align-items-center border rounded shadow-sm">
+          <? if($this->isAuthorized) : ?>
             <form method="POST" action="<?= FULL_SITE_ROOT . 'cart/order' ?>" >
               <input type="hidden" value="<?= $summ ; ?>" name="orderSumm">
               <h4>
@@ -111,23 +111,23 @@
                 <button type="submit" class=" btn btn-sm btn-primary" name="addOrder"> Оформить заказ </button>
               </a>
             </form>
-            <? else : ?>
+          <? else : ?>
             <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'user/auth' ?>">
               <button type="submit" class=" btn btn-sm btn-primary" name="authCart"> Оформить заказ </button>
             </a>
-            <? endif; ?>
-          </div>
-          
           <? endif; ?>
-          </div>
-
         </div>
+        
+        <? endif; ?>
+      </div>
 
-      <? else : ?>
+    </div>
+
+  <? else : ?>
       
-      <div>Ваша корзина пуста</div>
-      <br>
-      <br>
+    <div>Ваша корзина пуста</div>
+    <br>
+    <br>
 
       <div class="middle-description  bg-light">Популярные категории</div>
         <div class="album py-2 py ">
@@ -137,30 +137,29 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
               <? foreach ($mainGroups as $mainGroup): ?>
-              <? if(file_exists(IMG_ROOT. $mainGroup['group_id']. '.jpeg')) : ?>
-                <? $src = IMG_GROUP . $mainGroup['group_id']. '.jpeg';  ?>  
-              <? else : ?>
-                <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
-              <? endif; ?> 
-                
-              <div class="col">
-                <div class="card shadow-sm ">
-                  <div class="d-flex justify-content-center align-items-center">
-                  <img class="product_img_link_cart" width="150" height="150" 
-                  src=" <?= $src ?> " 
-                  alt="<?= $mainGroup['group_name'] ?>">
-                  </div>
-                  <div class="card-body">
-                    <p class="card-text"><?= $mainGroup['group_name']; ?></p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $mainGroup['group_translit'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
-                        </a>
+                <? if(file_exists(IMG_ROOT. $mainGroup['group_id']. '.jpeg')) : ?>
+                  <? $src = IMG_GROUP . $mainGroup['group_id']. '.jpeg';  ?>  
+                <? else : ?>
+                  <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
+                <? endif; ?>                   
+                <div class="col">
+                  <div class="card shadow-sm ">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <img class="product_img_link_cart" width="150" height="150" 
+                      src=" <?= $src ?> " 
+                      alt="<?= $mainGroup['group_name'] ?>">
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text"><?= $mainGroup['group_name']; ?></p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $mainGroup['group_translit'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
               <? endforeach; ?>
             </div>
             
@@ -172,9 +171,9 @@
 
 
 
-      <? endif; ?>
+  <? endif; ?>
 
 
+</div>
 
-
-    <? include_once("views/common/footer.html"); ?>
+<? include_once("views/common/footer.html"); ?>

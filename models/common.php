@@ -12,12 +12,5 @@ class Common {
         $this->connect = DB::getConnection();
 
     }
-
-
-
-    
-
-
-
-    
+ 
 }

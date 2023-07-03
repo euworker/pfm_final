@@ -2,6 +2,7 @@
 
 <!-- карусель -->
 
+
 <div id="carouselExampleControls " class="carousel slide h-25 container" data-bs-ride="carousel">
   <div class="carousel-inner  ">
     <div class="carousel-item active">
@@ -35,65 +36,65 @@
 
 <div class="container">
 
-<div class="middle-description  bg-light">Популярные категории</div>
-  
-<div class="album py-2 py ">
-      
-  <div class="container">
+  <div class="middle-description  bg-light">Популярные категории</div>
     
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-      <? foreach ($mainGroups as $mainGroup): ?>
-      <? if(file_exists(IMG_ROOT. $mainGroup['group_id']. '.jpeg')) : ?>
-        <? $src = IMG_GROUP . $mainGroup['group_id']. '.jpeg';  ?>  
-      <? else : ?>
-        <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
-      <? endif; ?> 
+  <div class="album py-2 py ">
         
-      <div class="col">
-        <div class="card shadow-sm ">
-          <div class="d-flex justify-content-center align-items-center">
-          <img class="product_img_link" width="150" height="150" 
-          src=" <?= $src ?> " 
-          alt="<?= $mainGroup['group_name'] ?>">
-          </div>
-          <div class="card-body">
-            <p class="card-text"><?= $mainGroup['group_name']; ?></p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $mainGroup['group_translit'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
-                </a>
+    <div class="container">
+      
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <? foreach ($mainGroups as $mainGroup): ?>
+          <? if(file_exists(IMG_ROOT. $mainGroup['group_id']. '.jpeg')) : ?>
+            <? $src = IMG_GROUP . $mainGroup['group_id']. '.jpeg';  ?>  
+          <? else : ?>
+            <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
+          <? endif; ?> 
+          
+          <div class="col">
+            <div class="card shadow-sm ">
+              <div class="d-flex justify-content-center align-items-center">
+              <img class="product_img_link" width="150" height="150" 
+              src=" <?= $src ?> " 
+              alt="<?= $mainGroup['group_name'] ?>">
+              </div>
+              <div class="card-body">
+                <p class="card-text"><?= $mainGroup['group_name']; ?></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . $mainGroup['group_translit'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <? endforeach; ?>
       </div>
-      <? endforeach; ?>
+      
     </div>
-    
-  </div>
 
-</div>
+  </div>
 
 </div>
 
 <!-- О компании -->
 <div class="container ">
-    <div class="middle-description  bg-light ">О компании</div>
-    <div class="row align-items-start d-flex ">
+  <div class="middle-description  bg-light ">О компании</div>
+  <div class="row align-items-start d-flex ">
 
-      <div class="col col-md-3 d-flex justify-content-center align-items-center">
-        <div class="group__foto "><img src="<?= IMG . 'best-crm-software-india-250x250.jpeg' ?>" class="d-block w-100"  alt="Платформа ИТ">
-        </div>
-      </div>
-      <div class="col col-md-9 group__name">
-        <p>Интернет-магазин &laquo;Платформа&nbsp;ИТ&raquo; приветствует Вас!
-        Мы&nbsp;работаем с&nbsp;физическими и&nbsp;юридическими лицами за&nbsp;наличный и&nbsp;безналичный расчет со&nbsp;100%-ной предоплатой, с&nbsp;оформлением всех предусмотренных законодательством документов.
-        Здесь Вы&nbsp;сможете подобрать и&nbsp;купить любое сетевое и&nbsp;телекоммуникационное оборудование, IP-телефонию и&nbsp;аксессуары к&nbsp;ней, IP-АТС и&nbsp;шлюзы, IP-камеры, IP-домофоны, сетевые хранилища, источники бесперебойного питания, стабилизаторы напряжения, шкафы и&nbsp;стойки, шредеры и&nbsp;детекторы банкнот, компьютеры и&nbsp;серверы, ноутбуки, мониторы, принтеры, квадрокоптеры и&nbsp;многую другую электронику в&nbsp;наличии и&nbsp;под заказ.
-        </p> 
-        <p>Все цены на&nbsp;сайте включают НДС!</p>
+    <div class="col col-md-3 d-flex justify-content-center align-items-center">
+      <div class="group__foto "><img src="<?= IMG . 'best-crm-software-india-250x250.jpeg' ?>" class="d-block w-100"  alt="Платформа ИТ">
       </div>
     </div>
+    <div class="col col-md-9 group__name">
+      <p>Интернет-магазин &laquo;Платформа&nbsp;ИТ&raquo; приветствует Вас!
+      Мы&nbsp;работаем с&nbsp;физическими и&nbsp;юридическими лицами за&nbsp;наличный и&nbsp;безналичный расчет со&nbsp;100%-ной предоплатой, с&nbsp;оформлением всех предусмотренных законодательством документов.
+      Здесь Вы&nbsp;сможете подобрать и&nbsp;купить любое сетевое и&nbsp;телекоммуникационное оборудование, IP-телефонию и&nbsp;аксессуары к&nbsp;ней, IP-АТС и&nbsp;шлюзы, IP-камеры, IP-домофоны, сетевые хранилища, источники бесперебойного питания, стабилизаторы напряжения, шкафы и&nbsp;стойки, шредеры и&nbsp;детекторы банкнот, компьютеры и&nbsp;серверы, ноутбуки, мониторы, принтеры, квадрокоптеры и&nbsp;многую другую электронику в&nbsp;наличии и&nbsp;под заказ.
+      </p> 
+      <p>Все цены на&nbsp;сайте включают НДС!</p>
+    </div>
+  </div>
 </div>
 
 

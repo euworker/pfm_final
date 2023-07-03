@@ -8,18 +8,15 @@ class ManufacturerController {
 
     public $menuProducts;
 
-    // public $userIsAdmin;
 
     public function __construct() {
         $this->manufacturerModel = new Manufacturer();
         $userModel = new User();
-        $this->isAuthorized = $userModel->checkIfUserAuthorized();
-        // global $userIsAdmin;  
+        $this->isAuthorized = $userModel->checkIfUserAuthorized(); 
         $this->groupModel = new Group();
         global $menuProducts;
         $this->menuProducts = $menuProducts;
         
-
     }
 
  
@@ -35,7 +32,6 @@ class ManufacturerController {
         $title = 'Производители';
         $src = PRODUCT_MANUFACTURER_GROUP_IMG;
         require_once("views/manufacturers/table.html");
-
 
     }
 
@@ -53,7 +49,6 @@ class ManufacturerController {
             $errors[] = 'Поля не могут быть пусты или слишком длинные';
         }     
         
-
         if (empty($errors)) {
             $this->manufacturerModel->insert($manufacturerName,$manufacturerDesc);
             header('Location: ' . FULL_SITE_ROOT . 'manufacturers');
@@ -67,13 +62,11 @@ class ManufacturerController {
 
     public function actionEdit($id){
         $errors = [];
-
         $manufacturer = $this->manufacturerModel->GetById($id);
 
         if (isset($_POST['manufacturerName'])) {
         $manufacturerName = htmlentities($_POST['manufacturerName']);
-        $manufacturerDesc = htmlentities($_POST['manufacturerDesc']);
-            
+        $manufacturerDesc = htmlentities($_POST['manufacturerDesc']);            
 
         if (empty($manufacturerName) 
             || empty($manufacturerDesc) 
@@ -101,16 +94,16 @@ class ManufacturerController {
         $manufacturer = $this->manufacturerModel->GetById($id);
         require_once("views/manufacturers/form.html");
 
-
     } 
 
 
     public function actionDelete($id) {
         $errors = [];
+
         if ( !is_numeric($id) ) {
             $errors[] = "Не число";
         }
-
+        
         $this->manufacturerModel->remove($id);
         header('Location: ' . FULL_SITE_ROOT . 'manufacturers');
     }

@@ -4,49 +4,49 @@
 
 <div class="container">
 
-    <nav aria-label="breadcrumb ">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
-          <? if(isset($h1)) : ?>
-            <li class="breadcrumb-item active"><?= $h1 ?></li>
-          <? endif; ?>
-        </ol>
-      </nav>
-           
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="<?= FULL_SITE_ROOT . '' ?>">Главная</a></li>
       <? if(isset($h1)) : ?>
-        <div class="container">
-            <h1><?= $h1 ?></h1>
-        </div>
+        <li class="breadcrumb-item active"><?= $h1 ?></li>
       <? endif; ?>
+    </ol>
+  </nav>
+          
+  <? if(isset($h1)) : ?>
+    <div class="container">
+      <h1><?= $h1 ?></h1>
+    </div>
+  <? endif; ?>
 
-      <? if(isset($order) && isset ($_POST['orderSumm'])) : ?>
-        <div class="container">
-            <p> Заказ № <?= $order ?> на сумму <?= $_POST['orderSumm'] ?>&nbsp;руб. успешно оформлен. С вами свяжутся в самое ближайшее время для уточнения подробностей заказа.</p>
-            <br>
-            <br>
-          </div>
-      <? else: ?>
-        <div class="container">
-          <p> Что-то не так! Позвоните по телефону <a class="address__item" href="tel:+78124567007"><i class="fas fa-phone-alt"></i>&nbsp;+7&nbsp;(812)&nbsp;456-70-07</a> или напишите на почту <a class="address__item"
-          href="mailto:platform-it@yandex.ru"><i class="fas fa-envelope"></i>&nbsp;platform-it@yandex.ru</a> . </p>
-          <br>
-          <br>
-        </div>
-      
-      <div class="middle-description  bg-light">Популярные категории</div>
-        <div class="album py-2 py ">
-              
-          <div class="container">
+  <? if(isset($order) && isset ($_POST['orderSumm'])) : ?>
+    <div class="container">
+        <p> Заказ № <?= $order ?> на сумму <?= $_POST['orderSumm'] ?>&nbsp;руб. успешно оформлен. С вами свяжутся в самое ближайшее время для уточнения подробностей заказа.</p>
+        <br>
+        <br>
+    </div>
+  <? else: ?>
+    <div class="container">
+      <p> Что-то не так! Позвоните по телефону <a class="address__item" href="tel:+78124567007"><i class="fas fa-phone-alt"></i>&nbsp;+7&nbsp;(812)&nbsp;456-70-07</a> или напишите на почту <a class="address__item"
+      href="mailto:platform-it@yandex.ru"><i class="fas fa-envelope"></i>&nbsp;platform-it@yandex.ru</a> . </p>
+      <br>
+      <br>
+    </div>
+  
+    <div class="middle-description  bg-light">Популярные категории</div>
+      <div class="album py-2 py ">
             
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        
-              <? foreach ($mainGroups as $mainGroup): ?>
+        <div class="container">
+          
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      
+            <? foreach ($mainGroups as $mainGroup): ?>
               <? if(file_exists(IMG_ROOT. $mainGroup['group_id']. '.jpeg')) : ?>
                 <? $src = IMG_GROUP . $mainGroup['group_id']. '.jpeg';  ?>  
               <? else : ?>
                 <? $src = PRODUCT_MANUFACTURER_GROUP_IMG; ?>         
               <? endif; ?> 
-                
+              
               <div class="col">
                 <div class="card shadow-sm ">
                   <div class="d-flex justify-content-center align-items-center">
@@ -65,15 +65,15 @@
                   </div>
                 </div>
               </div>
-              <? endforeach; ?>
-            </div>
-            
+            <? endforeach; ?>
           </div>
-        
+          
         </div>
-        
+      
       </div>
+      
+    </div>
 
-      <? endif; ?>
+  <? endif; ?>
 
-    <? include_once("views/common/footer.html"); ?>
+<? include_once("views/common/footer.html"); ?>

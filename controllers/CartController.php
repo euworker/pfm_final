@@ -31,6 +31,7 @@ class CartController {
             $title = 'Корзина';
             $h1 = 'Корзина';
             $errors = [];
+            
             if(isset($_POST['productId'])  && ( isset($_POST['addToCart']) || isset($_POST['removeFromCart'] ))) {
                 $product = $this->productModel->getById($_POST['productId']);
                 $cart = [];
@@ -60,31 +61,23 @@ class CartController {
             } 
             
             if (isset($_COOKIE["cart"])) {
-
                 $cart = unserialize($_COOKIE["cart"]);
-
                 foreach ($cart as $product_id=>$count) {
                     $src = IMG_PRODUCT . $product_id . '.jpeg';
                     if (file_exists(IMG_ROOT. $product_id . '.jpeg')) {
                         $src = IMG_PRODUCT . $product_id . '.jpeg';    
                     } else {
                         $src = PRODUCT_MANUFACTURER_GROUP_IMG;
-                    }
-                    
+                    }                    
                     $products[] = [
                         'product' => $this->productModel->getById($product_id),
                         'count' => $count,
                         'image' => $src
-                    ];
-                    
+                    ];                    
                 }
-
             } 
-            
-            
 
             require_once("views/cart/table.html");
-
         
     }
 
@@ -99,17 +92,11 @@ class CartController {
             $cart = unserialize($_COOKIE["cart"]);
             $order = $this->cartModel->insertOrder($_COOKIE['uid'], $cart);
             if ($order) {
-                // уменьшить кол-во продуктов - сделать метод. передаем cart, по циклу в продуктах уменьшаем кол-во в наличии минус те, что заказаны 
-
                 setcookie("cart", "", time()+ 60 * 60 * 24 * 365, path:'/');
             }
-
         }
 
-
-        //  во вью проверяем, что order существует и что он не false, то выводим сообщение, что заказ оформлен
         require_once("views/cart/table_order.html");
-        // если не оформлен, то передает что-то не так.
     }
     
 }

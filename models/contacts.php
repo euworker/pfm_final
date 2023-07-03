@@ -13,15 +13,4 @@ class Contacts {
 
     }
 
-    public function getContacts() {
-
-    }
-
-
-
-    
-
-
-
-    
 }

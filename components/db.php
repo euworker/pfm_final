@@ -24,8 +24,6 @@ public static function getConnection() {
 
     }
 
-    // выключаем все доступные функции
-
     private function __clone(){
         
     }

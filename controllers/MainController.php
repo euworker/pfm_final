@@ -21,14 +21,10 @@ class MainController {
     
 
     public function actionIndex($page = 1) { 
-        
-        // $manufacturers = $this->mainModel->getTotal();
         $mainGroups = $this->mainModel->getMainGroups();
         $title = 'Платформа ИТ - интернет-магазин техники и электроники';
         $description = 'Электроника и техника по выгодным ценам. Огромный ассортимент товаров, приятные цены, качественные консультации. Платформа ИТ - партнер для дома и бизнеса!';
         require_once("views/main/table.html");
-
-
 
     }
 

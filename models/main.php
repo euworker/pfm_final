@@ -17,7 +17,7 @@ class Main {
                     FROM `manufacturers` 
                     WHERE `manufacturer_is_deleted` = 0
                     LIMIT 6;
-        ";
+                    ";
         $result = mysqli_query($this->connect, $query);
         return mysqli_fetch_assoc($result)['count'];
 
@@ -35,8 +35,8 @@ class Main {
 
     public function getMainGroups() {
         $query = "SELECT * FROM `groups` 
-            WHERE group_level = 1 
-            LIMIT 6
+                    WHERE group_level = 1 
+                    LIMIT 6
                     ";
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -45,8 +45,8 @@ class Main {
 
     public function getMenuGroups() {
         $query = "SELECT * FROM `groups` 
-        WHERE group_level = 1 
-        LIMIT 6
+                    WHERE group_level = 1 
+                    LIMIT 6
                     ";
         $result = mysqli_query( $this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);

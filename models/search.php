@@ -26,20 +26,16 @@ class Search {
                     OR MATCH (`product_name`) 
                     AGAINST ('$search')
                     LIMIT 20;
-        ";
+                    ";
         $result = mysqli_query($this->connect, $query);    
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
     public function checkSearchResult($search)  {
-
-            
-            if ( preg_match("/^[А-Яа-яA-Za-z0-9_-]+$/u", $search)) {
-              
-                return '0';
-                
-            } else {
-                
+    
+            if ( preg_match("/^[А-Яа-яA-Za-z0-9_-]+$/u", $search)) {          
+                return '0';           
+            } else {                
                 return '1';
             }
             

@@ -33,52 +33,36 @@ class UsersController  {
             $email = clean($_POST['user_email']);
             $password = clean($_POST['user_password']);
             $passwordRepeat = clean($_POST['user_password_repeat']);
-            // проверки
 
             if (email_check($email) === 1 || check_length($email,5,100)) {
                 $errors[] = "Не корректные данные в поле 'email'";
 
             } else {
-            if (($password !== $passwordRepeat) || (empty($password) || empty($passwordRepeat)) || password_check($password) === 1) {
-                $errors[] = "Пароли не совпадают, пусты или не корректны ";
+                
+                if (($password !== $passwordRepeat) || (empty($password) || empty($passwordRepeat)) || password_check($password) === 1) {
+                    $errors[] = "Пароли не совпадают, пусты или не корректны ";
 
             } else {
                 $count = $this->userModel->checkIfUserExists($email);
-                //    проверяем наличие емаил 
+
                 if ($count === "1") {
                     $errors[] = "Такой email уже зарегистрирован";
                 }
-                // если ошибок нет
+
                 if (empty($errors)) {
-                    // шифруем пароль
                     $hashedPassword = md5($password);
-                    // print_r(' сделал md5');
                     $this->userModel->register($email,$hashedPassword);
-                    // print_r(' сделал register');
                     $userInfo = $this->userModel->getUserInfo($email,$hashedPassword);
-                    // print_r(' сделал getUserInfo');
 
-
-                    $token = generateToken();
-                    // print_r(' сделал generateToken');
-                    // нужно пересоздавать токен чаще
+                    $token = $this->helper->generateToken();
                     $tokenTime = time() + 30 * 60;
-                    // print_r(' сделал time');
                     $userId = $userInfo['user_id'];
-                    // print_r(' сделал userId');
 
                     $this->userModel->auth($userId, $token, $tokenTime) ;
-                    // print_r(' сделал auth');
                     
                     setcookie("uid", $userInfo['user_id'], time() + 2 * 24 * 3600, path:'/');
-                    //кука для токена
                     setcookie("t", $token, time() + 2 * 24 * 3600, path:'/');
-                    // кука токентайма
                     setcookie("tt", $tokenTime, time() + 2 * 24 * 3600, path:'/');
-                    // print_r($_SERVER['HTTP_REFERER']);
-                    // die;
-                    // до вызова реги сохранить в куках 'HTTP_REFERER'
-                    //   не срабатывает хедер локейшен, не перезаписывается dob (это мы и не передаем) !!!!!!!!!!!!!!!!!!!
                     header("Location: " . FULL_SITE_ROOT . 'cart');
 
                     } 
@@ -119,11 +103,9 @@ if (isset($_POST['user_email'])) {
         }
         // если ошибок нет
         if (empty($errors)) {
-            $token =$this->helper->generateToken();
-            // нужно пересоздавать токен чаще
+            $token = $this->helper->generateToken();
             $tokenTime = time() + 30 * 60;
-            $userId = $userInfo['user_id'];
-            
+            $userId = $userInfo['user_id'];            
             $this->userModel->auth($userId, $token, $tokenTime);
 
             // назвение куки, value, время жизни 2 дня, доступен на всем сайте

@@ -19,7 +19,6 @@ class SearchController  {
 
     }
     
-
     public function actionIndex(){
         
         $errors = [];
@@ -43,13 +42,12 @@ class SearchController  {
         }
     
         if (!empty($_COOKIE['search'])) {
-
             $searchResults = $this->searchModel->getSearchResult($_COOKIE['search']);
+
             if (empty($searchResults)) {
                 $emptySearch = "К сожалению, ничего не найдено";
                 setcookie("search", "", time() + 2 * 24 * 3600, path:'/');
             }
-
         } else {
             $emptySearch = "К сожалению, ничего не найдено";
             setcookie("search", "", time() + 2 * 24 * 3600, path:'/');

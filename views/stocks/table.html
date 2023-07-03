@@ -10,36 +10,36 @@
     </ol>
   </nav>
 
-<h1 class="middle-description ">Акции</h1>
-<p>Здесь Вы&nbsp;найдете информацию обо всех самых актуальных предложениях от компании Платформа&nbsp;ИТ.</p>
-    
-<div class="album py-2 py ">
+  <h1 class="middle-description ">Акции</h1>
+  <p>Здесь Вы&nbsp;найдете информацию обо всех самых актуальных предложениях от компании Платформа&nbsp;ИТ.</p>
       
-  <div class="container">
- 
-    <div class="col ">
-      <? foreach ($stocks as $stock): ?>
-      <div class="d-flex justify-content-start align-items-center">
-        <div class="card shadow-sm d-flex flex-row col-12">
-          <div class="card-body">
-            <p class="card-text "><?= $stock['stock_title']; ?></p>
-            <p class="card-text"><?= $stock['stock_description']; ?></p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . current($this->stockModel->getNameGroupByProductId($stock['stock_product_id'])) . '/' . $stock['stock_product_id'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
-                  </a>
+  <div class="album py-2 py ">
+        
+    <div class="container">
+  
+      <div class="col ">
+        <? foreach ($stocks as $stock): ?>
+          <div class="d-flex justify-content-start align-items-center">
+            <div class="card shadow-sm d-flex flex-row col-12">
+              <div class="card-body">
+                <p class="card-text "><?= $stock['stock_title']; ?></p>
+                <p class="card-text"><?= $stock['stock_description']; ?></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a aria-current="page" href=" <?= FULL_SITE_ROOT . 'product/' . current($this->stockModel->getNameGroupByProductId($stock['stock_product_id'])) . '/' . $stock['stock_product_id'] ?>"><button type="button" class="btn btn-sm btn-outline-primary">Перейти</button>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <? endforeach; ?>
       </div>
-      <? endforeach; ?>
+      <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
+      
     </div>
-    <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
-    
-  </div>
 
-</div>
+  </div>
   
 </div>
 

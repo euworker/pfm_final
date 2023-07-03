@@ -13,49 +13,51 @@
     </ol>
   </nav>
 
-<h1 class="middle-description ">Производители</h1>
-<p>Здесь Вы&nbsp;найдете информацию обо всех производителях представленных на&nbsp;сайте Платформа&nbsp;ИТ.</p>
-    
-<div class="album py-2 py ">
+  <h1 class="middle-description ">Производители</h1>
+  <p>Здесь Вы&nbsp;найдете информацию обо всех производителях представленных на&nbsp;сайте Платформа&nbsp;ИТ.</p>
       
-  <div class="container">
-    <? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?> 
-    
-      <a type="submit" class="btn btn-primary" href="<?= FULL_SITE_ROOT . 'manufacturer/add'; ?>">
-        Добавить
-      </a>
-      <br>
-      <br>
-    <? endif; ?> 
-    <? if (!empty($errors)) : ?>
-      <p class="border border-warning rounded"><? print($errors[0]) ?></p>
-    <? endif; ?>
-    <div class="col ">
-      <? foreach ($manufacturers as $manufacturer): ?>
-      <div class="d-flex justify-content-between align-items-center">
-        <div class=" card shadow-sm d-flex flex-row">
-          <img class="product_img_link_cart" src="<?= $src ?>" alt="<?= $manufacturer['manufacturer_name']; ?>" >
-          <div class="card-body ">
-            <h4 class="card-text "><?= $manufacturer['manufacturer_name']; ?> </h4>
-            <p class="card-text"><?= $manufacturer['manufacturer_description']; ?> </p>
-            <? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?>
-                <a type="submit" class="btn btn-success" href="<?= FULL_SITE_ROOT . 'manufacturer/edit/' . $manufacturer['manufacturer_id'] ; ?>">
-                  Изменить
-                </a>
-               <button type="submit" class="btn btn-danger" onclick="remove('manufacturer', <?= $manufacturer['manufacturer_id']; ?> )">
-                    Удалить
-               </button>
-            <? endif; ?>
+  <div class="album py-2 py ">
+        
+    <div class="container">
+      <? if ($this->isAuthorized) :  ?>
+        <? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?> 
+        
+          <a type="submit" class="btn btn-primary" href="<?= FULL_SITE_ROOT . 'manufacturer/add'; ?>">
+            Добавить
+          </a>
+          <br>
+          <br>
+        <? endif; ?> 
+      <? endif; ?> 
+      <? if (!empty($errors)) : ?>
+        <p class="border border-warning rounded"><? print($errors[0]) ?></p>
+      <? endif; ?>
+      <div class="col ">
+        <? foreach ($manufacturers as $manufacturer): ?>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class=" card shadow-sm d-flex flex-row">
+              <img class="product_img_link_cart" src="<?= $src ?>" alt="<?= $manufacturer['manufacturer_name']; ?>" >
+              <div class="card-body ">
+                <h4 class="card-text "><?= $manufacturer['manufacturer_name']; ?> </h4>
+                <p class="card-text"><?= $manufacturer['manufacturer_description']; ?> </p>
+                <? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?>
+                    <a type="submit" class="btn btn-success" href="<?= FULL_SITE_ROOT . 'manufacturer/edit/' . $manufacturer['manufacturer_id'] ; ?>">
+                      Изменить
+                    </a>
+                    <button type="submit" class="btn btn-danger" onclick="remove('manufacturer', <?= $manufacturer['manufacturer_id']; ?> )">
+                      Удалить
+                    </button>
+                <? endif; ?>
+              </div>
+            </div>
           </div>
-        </div>
+        <? endforeach; ?>
       </div>
-      <? endforeach; ?>
+      <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
+      
     </div>
-    <div class="pagination d-flex justify-content-center align-items-center"><?= $pagination->get(); ?> </div>
-    
-  </div>
 
-</div>
+  </div>
   
 </div>
 

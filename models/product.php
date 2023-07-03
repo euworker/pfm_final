@@ -141,9 +141,9 @@ class Product {
     public function getTotalChildGroupsInParentGroup($group_name_translit) {
 
         $query = " SELECT `group_id`
-            FROM `groups`
-            WHERE `group_translit` = '$group_name_translit'
-            ";
+                    FROM `groups`
+                    WHERE `group_translit` = '$group_name_translit'
+                    ";
         $result = mysqli_query($this->connect, $query);
         $parent_group_id = mysqli_fetch_assoc($result)['group_id'];
 
@@ -157,15 +157,15 @@ class Product {
 
     public function getProductByGroup($group_id) {
         $query ="SELECT `product_id`, `product_art`, `product_name`, `product_description`, `product_price`, `product_quantity`,
-                 `manufacturer_name`, `manufacturer_id`
-                FROM `products`
-                LEFT JOIN `manufacturers` ON `product_manufacturer_id` = `manufacturer_id`
-                LEFT JOIN `groups` ON `product_group_id` = `group_id`
+                    `manufacturer_name`, `manufacturer_id`
+                    FROM `products`
+                    LEFT JOIN `manufacturers` ON `product_manufacturer_id` = `manufacturer_id`
+                    LEFT JOIN `groups` ON `product_group_id` = `group_id`
 
-                WHERE (`product_is_deleted` = 0 OR `product_is_deleted` is null OR `product_is_deleted` ='') AND `product_group_id` = $group_id
-                GROUP BY `product_id`
-                ORDER BY `product_id` DESC
-                "; 
+                    WHERE (`product_is_deleted` = 0 OR `product_is_deleted` is null OR `product_is_deleted` ='') AND `product_group_id` = $group_id
+                    GROUP BY `product_id`
+                    ORDER BY `product_id` DESC
+                    "; 
         $result = mysqli_query($this->connect, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }

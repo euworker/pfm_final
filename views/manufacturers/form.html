@@ -2,30 +2,30 @@
       
 
 <? if ($this->isAuthorized) :  ?>
-<? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?> 
+  <? if ((isset($_COOKIE["ad"]) && $_COOKIE["ad"]) == 1) : ?> 
 
-<form method="POST">
-  <div class="mb-3 container">
-    <div class="mb-3">
-      <label class="form-label">Наименование вендора</label> <br>
-      <input type="text" class="form-control" name="manufacturerName" value ="<?= isset ($manufacturer) ? $manufacturer['manufacturer_name'] : ''; ?>" >
-    </div>
-    <div class="mb-3 form-floating">
-      <label for="floatingTextarea_add">Описание вендора</label> <br>    
-    <textarea class="form-control" id="floatingTextarea_add" name="manufacturerDesc"><?= isset ($manufacturer) ? $manufacturer['manufacturer_description'] : ''; ?> </textarea>
-    </div>
-    <? if (!empty($errors)) : ?>
-      <p class="border border-warning rounded"><? print($errors[0]) ?></p>
-    <? endif; ?>
+    <form method="POST">
+      <div class="mb-3 container">
+        <div class="mb-3">
+          <label class="form-label">Наименование вендора</label> <br>
+          <input type="text" class="form-control" name="manufacturerName" value ="<?= isset ($manufacturer) ? $manufacturer['manufacturer_name'] : ''; ?>" >
+        </div>
+        <div class="mb-3 form-floating">
+          <label for="floatingTextarea_add">Описание вендора</label> <br>    
+          <textarea class="form-control" id="floatingTextarea_add" name="manufacturerDesc"><?= isset ($manufacturer) ? $manufacturer['manufacturer_description'] : ''; ?> </textarea>
+        </div>
+        <? if (!empty($errors)) : ?>
+          <p class="border border-warning rounded"><? print($errors[0]) ?></p>
+        <? endif; ?>
 
 
-    <button type="submit" class="btn btn-primary">
-      <?= isset($manufacturer) ? 'Изменить' : 'Добавить'; ?> 
-      </button>
+        <button type="submit" class="btn btn-primary">
+          <?= isset($manufacturer) ? 'Изменить' : 'Добавить'; ?> 
+        </button>
 
-  </div>
-</form>
-<? endif; ?> 
+      </div>
+    </form>
+  <? endif; ?> 
 <? endif; ?> 
 
 
